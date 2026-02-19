@@ -6,11 +6,8 @@
   <title>Ramadan Companion • Rida Ayesha 🌙</title>
   <style>
     :root{
-      --bg1:#050916;
-      --bg2:#071a2a;
-      --gold:#f7d37a;
-      --gold2:#e8b84c;
-      --soft:#b8d9ff;
+      --bg1:#050916; --bg2:#071a2a;
+      --gold:#f7d37a; --gold2:#e8b84c;
       --card: rgba(255,255,255,.09);
       --border: rgba(255,255,255,.16);
       --shadow: rgba(0,0,0,.38);
@@ -30,18 +27,18 @@
       overflow-x:hidden;
     }
 
-    /* Kaaba background layer (put your image at assets/kaaba.jpg or change URL) */
+    /* Kaaba background (direct, no need to download) */
     .kaaba-bg{
       position:fixed; inset:0;
       background:
-        linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.62)),
-        url("assets/kaaba.jpg") center/cover no-repeat;
+        linear-gradient(180deg, rgba(0,0,0,.62), rgba(0,0,0,.70)),
+        url("https://upload.wikimedia.org/wikipedia/commons/6/67/Kaaba_Masjid_Haraam_Makkah.jpg") center/cover no-repeat;
       filter: saturate(1.05) contrast(1.05);
-      opacity:.55;
+      opacity:.58;
       z-index:-3;
     }
 
-    /* Subtle arabic pattern overlay */
+    /* Star + arabic vibe overlay */
     .pattern{
       position:fixed; inset:0;
       pointer-events:none;
@@ -58,20 +55,16 @@
     }
     @keyframes twinkle{ from{opacity:.35} to{opacity:.65} }
 
-    .wrap{
-      max-width:1100px;
-      margin:0 auto;
-      padding:20px 16px 60px;
-    }
+    .wrap{ max-width:1100px; margin:0 auto; padding:20px 16px 60px; }
 
-    /* Top bar */
     .topbar{
       display:flex; align-items:center; justify-content:space-between; gap:14px;
       margin-bottom:12px;
+      flex-wrap:wrap;
     }
     .brand{
       display:flex; align-items:center; gap:12px;
-      min-width: 260px;
+      min-width:260px;
     }
     .badge{
       width:46px; height:46px; border-radius:16px;
@@ -80,21 +73,15 @@
       border:1px solid var(--border);
       box-shadow: 0 12px 26px var(--shadow);
     }
-    .brand h1{
-      margin:0;
-      font-size:16px;
-      font-weight:800;
-      letter-spacing:.2px;
-    }
-    .brand p{margin:2px 0 0; font-size:12px; color:var(--muted2)}
+    .brand h1{ margin:0; font-size:16px; font-weight:900; letter-spacing:.2px; }
+    .brand p{ margin:2px 0 0; font-size:12px; color:var(--muted2) }
 
     /* Dua marquee */
     .marquee{
-      flex:1;
-      min-width: 240px;
+      flex:1; min-width: 260px;
       border-radius:16px;
       border:1px solid rgba(255,255,255,.15);
-      background: rgba(0,0,0,.20);
+      background: rgba(0,0,0,.22);
       overflow:hidden;
       box-shadow: 0 10px 26px rgba(0,0,0,.25);
     }
@@ -106,18 +93,11 @@
       align-items:center;
       white-space:nowrap;
       animation: scroll 18s linear infinite;
-      color: rgba(255,255,255,.82);
+      color: rgba(255,255,255,.84);
     }
-    .marquee .track span{
-      font-size:13px;
-      letter-spacing:.2px;
-    }
-    @keyframes scroll{
-      from{ transform: translateX(0) }
-      to{ transform: translateX(-50%) }
-    }
+    @keyframes scroll{ from{ transform: translateX(0) } to{ transform: translateX(-50%) } }
+    .marquee span{ font-size:13px; letter-spacing:.2px }
 
-    /* Audio controls */
     .audioDock{
       display:flex; align-items:center; gap:10px;
       padding:10px 12px;
@@ -134,7 +114,7 @@
       padding:10px 12px;
       border-radius:14px;
       cursor:pointer;
-      font-weight:800;
+      font-weight:900;
       transition: transform .12s ease, filter .2s ease, background .2s ease;
       user-select:none;
     }
@@ -157,8 +137,7 @@
     .select option{ color:#000; }
 
     .chip{
-      display:inline-flex;
-      align-items:center; gap:8px;
+      display:inline-flex; align-items:center; gap:8px;
       padding:8px 10px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.14);
@@ -177,7 +156,6 @@
       box-shadow: 0 0 16px rgba(69,255,154,.85);
     }
 
-    /* Main grid */
     .grid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
@@ -185,12 +163,7 @@
       margin-top:12px;
       align-items:start;
     }
-    @media (max-width: 980px){
-      .grid{ grid-template-columns:1fr }
-      .topbar{ flex-wrap:wrap }
-      .brand{ min-width:auto }
-      .marquee{ order: 3; width:100% }
-    }
+    @media (max-width: 980px){ .grid{ grid-template-columns:1fr } }
 
     .card{
       border-radius:22px;
@@ -208,38 +181,30 @@
     .card .head h2{
       margin:0;
       font-size:14px;
-      font-weight:900;
+      font-weight:1000;
       letter-spacing:.2px;
-      color: rgba(255,255,255,.92);
       display:flex; align-items:center; gap:10px;
     }
     .card .body{ padding:14px; }
 
-    /* Decorative vibe row */
-    .vibe{
-      display:flex; gap:10px; flex-wrap:wrap;
-      margin-top:10px;
-    }
+    .vibe{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
     .vibe .pill{
       border-radius:18px;
       border:1px solid rgba(247,211,122,.22);
       background: rgba(247,211,122,.10);
       padding:10px 12px;
       font-size:13px;
-      color: rgba(255,255,255,.86);
       display:flex; align-items:center; gap:8px;
+      color: rgba(255,255,255,.88);
     }
 
-    /* Today tiles */
     .tiles{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap:10px;
       margin-top:10px;
     }
-    @media (max-width: 640px){
-      .tiles{ grid-template-columns: 1fr }
-    }
+    @media (max-width: 640px){ .tiles{ grid-template-columns: 1fr } }
     .tile{
       border-radius:18px;
       border:1px solid rgba(255,255,255,.14);
@@ -249,21 +214,18 @@
       overflow:hidden;
     }
     .tile b{ display:block; font-size:12px; color: rgba(255,255,255,.70); letter-spacing:.2px }
-    .tile .big{
-      margin-top:8px;
-      font-size:24px;
-      font-weight:1000;
-      letter-spacing:.4px;
-    }
+    .tile .big{ margin-top:8px; font-size:24px; font-weight:1000; letter-spacing:.4px; }
     .tile small{ display:block; margin-top:6px; color: rgba(255,255,255,.60) }
-
-    /* Countdown */
-    .countRow{
-      display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;
+    .glow{
+      position:absolute; right:-40px; bottom:-40px;
+      width:160px; height:160px; border-radius:50%;
+      background: radial-gradient(circle at 40% 40%, rgba(247,211,122,.30), rgba(247,211,122,0) 65%);
+      pointer-events:none;
     }
+
+    .countRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
     .tbox{
-      flex:1;
-      min-width:90px;
+      flex:1; min-width:90px;
       border-radius:16px;
       border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.08);
@@ -273,18 +235,15 @@
     .tbox .num{ font-size:26px; font-weight:1000; letter-spacing:.4px }
     .tbox .lbl{ font-size:11px; color: rgba(255,255,255,.65); margin-top:2px }
 
-    /* Table */
+    .note{ margin-top:8px; color: rgba(255,255,255,.66); font-size:12px; line-height:1.5; }
+
     .tableWrap{
       overflow:auto;
       border-radius:18px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.16);
     }
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:720px;
-    }
+    table{ width:100%; border-collapse:collapse; min-width:720px; }
     th,td{
       padding:10px 10px;
       border-bottom:1px solid rgba(255,255,255,.10);
@@ -307,31 +266,7 @@
       background: rgba(247,211,122,.08);
     }
     .muted{ color: rgba(255,255,255,.58) }
-
-    .footer{
-      margin-top:14px;
-      text-align:center;
-      color: rgba(255,255,255,.55);
-      font-size:12px;
-    }
-
-    .note{
-      margin-top:8px;
-      color: rgba(255,255,255,.66);
-      font-size:12px;
-      line-height:1.5;
-    }
-
-    /* tiny candle glow */
-    .glow{
-      position:absolute;
-      right:-40px; bottom:-40px;
-      width:160px; height:160px;
-      border-radius:50%;
-      background: radial-gradient(circle at 40% 40%, rgba(247,211,122,.30), rgba(247,211,122,0) 65%);
-      filter: blur(.2px);
-      pointer-events:none;
-    }
+    .footer{ margin-top:14px; text-align:center; color: rgba(255,255,255,.55); font-size:12px; }
   </style>
 </head>
 <body>
@@ -349,7 +284,7 @@
       </div>
 
       <div class="marquee" title="Dua marquee">
-        <div class="track" id="duaTrack">
+        <div class="track">
           <span>اللَّهُمَّ بَلِّغْنَا رَمَضَانَ</span>
           <span>اللَّهُمَّ تَقَبَّلْ مِنَّا الصِّيَامَ وَالْقِيَامَ</span>
           <span>رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ</span>
@@ -359,16 +294,21 @@
         </div>
       </div>
 
+      <!-- Quran Audio (NO add-url, built-in API based) -->
       <div class="audioDock">
         <span class="chip"><span class="dot" id="audioDot"></span><span id="audioState">Audio: OFF</span></span>
 
-        <select class="select" id="reciterSelect" title="Choose / add recitation">
-          <option value="">Select recitation…</option>
-          <option value="CUSTOM">Add custom URL…</option>
-          <!-- You can add your own hosted mp3 links here -->
-          <!-- Example:
-          <option value="https://yourdomain.com/surah-al-fatiha.mp3">Al-Fatiha (MP3)</option>
-          -->
+        <select class="select" id="reciterSelect" title="Reciter">
+          <option value="3" selected>Abdur-Rahman as-Sudais</option>
+          <option value="10">Sa‘ud ash-Shuraym</option>
+          <option value="7">Mishari Rashid al-‘Afasy</option>
+          <option value="4">Abu Bakr al-Shatri</option>
+          <option value="5">Hani ar-Rifai</option>
+          <option value="2">AbdulBaset (Murattal)</option>
+        </select>
+
+        <select class="select" id="surahSelect" title="Surah">
+          <option value="1">1 • Al-Fatihah</option>
         </select>
 
         <button class="btn primary" id="playBtn">▶ Play</button>
@@ -379,7 +319,7 @@
     </div>
 
     <div class="grid">
-      <!-- LEFT: Today + Countdown -->
+      <!-- LEFT -->
       <div class="card">
         <div class="head">
           <h2>🌙 Aaj ka Sehri & Iftar</h2>
@@ -388,9 +328,10 @@
             <span class="chip" id="locTag">📍 —</span>
           </div>
         </div>
+
         <div class="body">
           <div class="vibe">
-            <div class="pill">🕯️ Candle light vibes</div>
+            <div class="pill">🕯️ Candle vibes</div>
             <div class="pill">🌴 Dates ready</div>
             <div class="pill">✨ Arabic ambiance</div>
           </div>
@@ -418,12 +359,12 @@
 
           <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
             <select class="select" id="mode">
-              <option value="auto">Auto detect (GPS)</option>
+              <option value="auto" selected>Auto detect (GPS)</option>
               <option value="city">City picker</option>
             </select>
 
             <select class="select" id="citySelect" disabled>
-              <option value="Karachi">Karachi</option>
+              <option value="Karachi" selected>Karachi</option>
               <option value="Islamabad">Islamabad</option>
               <option value="Lahore">Lahore</option>
               <option value="Rawalpindi">Rawalpindi</option>
@@ -433,7 +374,7 @@
               <option value="Quetta">Quetta</option>
             </select>
 
-            <input class="input" id="customCity" placeholder="Custom city (optional), e.g., Abbottabad" disabled />
+            <input class="input" id="customCity" placeholder="Custom city (optional)" disabled />
 
             <button class="btn primary" id="loadBtn">🔄 Refresh Times</button>
             <button class="btn" id="saveBtn">💾 Save</button>
@@ -444,7 +385,7 @@
           </div>
 
           <div style="margin-top:12px;">
-            <h3 style="margin:0 0 8px; font-size:14px; font-weight:900; color:rgba(255,255,255,.9);">⏳ Iftar tak countdown</h3>
+            <h3 style="margin:0 0 8px; font-size:14px; font-weight:1000;">⏳ Iftar tak countdown</h3>
             <div class="countRow">
               <div class="tbox"><div class="num" id="hh">--</div><div class="lbl">Hours</div></div>
               <div class="tbox"><div class="num" id="mm">--</div><div class="lbl">Minutes</div></div>
@@ -466,29 +407,16 @@
                 </div>
 
                 <div style="margin-top:10px; border-radius:18px; border:1px solid rgba(247,211,122,.25); background:rgba(247,211,122,.10); padding:12px; line-height:1.7;">
-                  Rida Ayesha, aaj ka iftar tumhare saath… Allah hamare ghar ko barkat, sukoon aur mohabbat se bhar de. Ameen. 🌙🤍
+                  Rida Ayesha, Allah hamare ghar ko barkat, sukoon aur mohabbat se bhar de. Ameen. 🌙🤍
                 </div>
-
-                <div style="display:grid; gap:10px; grid-template-columns:repeat(3,1fr); margin-top:10px;">
-                  <div style="border-radius:18px; border:1px solid rgba(255,255,255,.12); background:rgba(0,0,0,.18); padding:12px;">
-                    <b>🍽️ Voucher</b><div class="muted" style="margin-top:6px; font-size:12px;">Eid week surprise dinner</div>
-                  </div>
-                  <div style="border-radius:18px; border:1px solid rgba(255,255,255,.12); background:rgba(0,0,0,.18); padding:12px;">
-                    <b>🧹 Voucher</b><div class="muted" style="margin-top:6px; font-size:12px;">One day no chores</div>
-                  </div>
-                  <div style="border-radius:18px; border:1px solid rgba(255,255,255,.12); background:rgba(0,0,0,.18); padding:12px;">
-                    <b>🎬 Voucher</b><div class="muted" style="margin-top:6px; font-size:12px;">Movie night (your choice)</div>
-                  </div>
-                </div>
-
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
 
-      <!-- RIGHT: Ramadan Calendar -->
+      <!-- RIGHT -->
       <div class="card">
         <div class="head">
           <h2>📅 Poore Ramadan ka Sehri & Iftar</h2>
@@ -514,34 +442,32 @@
 
           <div class="note">
             Sehri usually Fajr se pehle hoti hai — is liye table me <b>Imsak</b> aur <b>Fajr</b> dono show ho rahe hain.
-            (Har masjid me 1–3 minutes ka farq ho sakta hai.)
+            (Masjid/local roza timetable me 1–3 minutes ka farq ho sakta hai.)
           </div>
         </div>
       </div>
     </div>
 
     <div class="footer">
-      Built with ❤️ • Dynamic timings via AlAdhan API • Background: add <code>assets/kaaba.jpg</code>
+      Built with ❤️ • Timings via AlAdhan API • Quran Audio via Quran.com/QuranFoundation APIs
     </div>
   </div>
 
   <audio id="quranAudio" crossorigin="anonymous"></audio>
 
   <script>
-    // =========================
-    // CONFIG
-    // =========================
-    const WIFE_NAME = "Rida Ayesha";
-    const METHOD = 1; // Pakistan-friendly calculation method
+    // ====== CONFIG ======
+    const METHOD = 1;                 // Prayer time calc method (Pakistan-friendly)
     const DEFAULT_COUNTRY = "Pakistan";
-    const PREF_KEY = "ramadan_pref_v1";
-
-    // Ramadan hijri month number = 9
+    const PREF_KEY = "ramadan_pref_v2";
     const RAMADAN_MONTH_NUM = 9;
 
-    // =========================
-    // UI refs
-    // =========================
+    // Quran.com / QuranFoundation endpoints
+    const Q_CHAPTERS = "https://api.quran.com/api/v4/chapters";
+    const Q_RECITATIONS = "https://api.quran.com/api/v4/resources/recitations";
+    const Q_CHAPTER_RECITATIONS = (reciterId) => `https://api.quran.com/api/v4/chapter_recitations/${reciterId}`;
+
+    // ====== UI refs ======
     const todayTag = document.getElementById("todayTag");
     const locTag = document.getElementById("locTag");
     const calTag = document.getElementById("calTag");
@@ -570,33 +496,22 @@
     // Audio UI
     const audio = document.getElementById("quranAudio");
     const reciterSelect = document.getElementById("reciterSelect");
+    const surahSelect = document.getElementById("surahSelect");
     const playBtn = document.getElementById("playBtn");
     const pauseBtn = document.getElementById("pauseBtn");
     const vol = document.getElementById("vol");
     const audioDot = document.getElementById("audioDot");
     const audioState = document.getElementById("audioState");
 
-    // =========================
-    // Helpers
-    // =========================
-    function pad(n){ return String(n).padStart(2,"0"); }
-    function hhmm(str){
-      if(!str) return "--:--";
-      return String(str).trim().slice(0,5);
-    }
-    function todayISO(){
+    // ====== Helpers ======
+    const pad = (n)=> String(n).padStart(2,"0");
+    const hhmm = (str)=> (str ? String(str).trim().slice(0,5) : "--:--");
+
+    function todayDDMMYYYY(){
       const d = new Date();
-      const y = d.getFullYear();
-      const m = pad(d.getMonth()+1);
-      const day = pad(d.getDate());
-      return `${day}-${m}-${y}`; // AlAdhan expects DD-MM-YYYY for some endpoints
+      return `${pad(d.getDate())}-${pad(d.getMonth()+1)}-${d.getFullYear()}`;
     }
-    function sameDay(d, y, m, day){
-      return d.getFullYear()===y && (d.getMonth()+1)===m && d.getDate()===day;
-    }
-    function toISODate(y,m,d){
-      return `${y}-${pad(m)}-${pad(d)}`;
-    }
+
     function parseTimeToToday(timeStr){
       const clean = hhmm(timeStr);
       const [H,M] = clean.split(":").map(Number);
@@ -605,9 +520,6 @@
       return d;
     }
 
-    // =========================
-    // Mode UI
-    // =========================
     function setModeUI(){
       const isCity = modeEl.value === "city";
       citySelect.disabled = !isCity;
@@ -620,129 +532,67 @@
       return c.length ? c : citySelect.value;
     }
 
-    // =========================
-    // AlAdhan API
-    // =========================
-    async function fetchTimingsByCityForDate(city, country, dateDDMMYYYY){
-      const url = `https://api.aladhan.com/v1/timingsByCity/${encodeURIComponent(dateDDMMYYYY)}?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&method=${METHOD}`;
+    // ====== AlAdhan API ======
+    async function fetchTimingsByCityForDate(city, country, ddmmyyyy){
+      const url = `https://api.aladhan.com/v1/timingsByCity/${encodeURIComponent(ddmmyyyy)}?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&method=${METHOD}`;
       const res = await fetch(url);
-      if(!res.ok) throw new Error("API failed timingsByCity");
+      if(!res.ok) throw new Error("timingsByCity failed");
       const j = await res.json();
       return j?.data;
     }
 
-    async function fetchTimingsByGeoForDate(lat, lon, dateDDMMYYYY){
-      const url = `https://api.aladhan.com/v1/timings/${encodeURIComponent(dateDDMMYYYY)}?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&method=${METHOD}`;
+    async function fetchTimingsByGeoForDate(lat, lon, ddmmyyyy){
+      const url = `https://api.aladhan.com/v1/timings/${encodeURIComponent(ddmmyyyy)}?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&method=${METHOD}`;
       const res = await fetch(url);
-      if(!res.ok) throw new Error("API failed timings by geo");
+      if(!res.ok) throw new Error("timings geo failed");
       const j = await res.json();
       return j?.data;
     }
 
     async function fetchCalendarByCity(month, year, city, country){
-      // returns an array for the whole Gregorian month with hijri info included
       const url = `https://api.aladhan.com/v1/calendarByCity/${year}/${month}?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&method=${METHOD}`;
       const res = await fetch(url);
-      if(!res.ok) throw new Error("API failed calendarByCity");
+      if(!res.ok) throw new Error("calendarByCity failed");
       const j = await res.json();
       return j?.data || [];
     }
 
-    async function fetchGToH(dateDDMMYYYY){
-      // Convert Gregorian to Hijri
-      const url = `https://api.aladhan.com/v1/gToH/${encodeURIComponent(dateDDMMYYYY)}`;
+    async function fetchGToH(ddmmyyyy){
+      const url = `https://api.aladhan.com/v1/gToH/${encodeURIComponent(ddmmyyyy)}`;
       const res = await fetch(url);
-      if(!res.ok) throw new Error("API failed gToH");
+      if(!res.ok) throw new Error("gToH failed");
       const j = await res.json();
       return j?.data;
     }
 
     async function fetchHToG(hijriDDMMYYYY){
-      // Convert Hijri to Gregorian
       const url = `https://api.aladhan.com/v1/hToG/${encodeURIComponent(hijriDDMMYYYY)}`;
       const res = await fetch(url);
-      if(!res.ok) throw new Error("API failed hToG");
+      if(!res.ok) throw new Error("hToG failed");
       const j = await res.json();
       return j?.data;
     }
 
-    // =========================
-    // Audio player (safe: user provides URLs)
-    // =========================
-    function setAudioUI(isOn){
-      if(isOn){
-        audioDot.classList.add("on");
-        audioState.textContent = "Audio: ON";
-      }else{
-        audioDot.classList.remove("on");
-        audioState.textContent = "Audio: OFF";
-      }
-    }
-    vol.addEventListener("input", ()=>{ audio.volume = Number(vol.value); });
-    audio.volume = Number(vol.value);
+    // ====== Today UI ======
+    function setTodayUI(data){
+      const t = data?.timings || {};
+      const g = data?.date?.gregorian || {};
+      const h = data?.date?.hijri || {};
 
-    function promptForUrl(){
-      const url = prompt("Paste a direct audio URL (MP3/stream). Tip: host MP3 in your repo or use an official source.");
-      if(!url) return;
-      // Add it to dropdown
-      const opt = document.createElement("option");
-      opt.value = url.trim();
-      opt.textContent = `Custom: ${url.trim().slice(0,45)}${url.trim().length>45?"…":""}`;
-      reciterSelect.appendChild(opt);
-      reciterSelect.value = opt.value;
-      // Save last selected
-      localStorage.setItem("quran_audio_url", opt.value);
+      todayTag.textContent = `${g.weekday?.en || ""} • ${g.day || ""} ${g.month?.en || ""} ${g.year || ""}`.trim() || "Today";
+      fajrTime.textContent = hhmm(t.Fajr);
+      maghribTime.textContent = hhmm(t.Maghrib);
+      imsakNote.textContent = `Imsak: ${hhmm(t.Imsak)}`;
+      sunsetNote.textContent = `Sunset: ${hhmm(t.Sunset)}`;
+
+      const isRam = Number(h.month?.number) === RAMADAN_MONTH_NUM;
+      hijriText.textContent = `Hijri: ${h.day || ""} ${h.month?.en || ""} ${h.year || ""}`.trim();
+      ramDay.textContent = isRam ? `Day ${h.day}` : "—";
+
+      startCountdown(t.Maghrib);
     }
 
-    reciterSelect.addEventListener("change", ()=>{
-      if(reciterSelect.value === "CUSTOM"){
-        promptForUrl();
-      } else if(reciterSelect.value){
-        localStorage.setItem("quran_audio_url", reciterSelect.value);
-      }
-    });
-
-    playBtn.addEventListener("click", async ()=>{
-      const url = reciterSelect.value || localStorage.getItem("quran_audio_url") || "";
-      if(!url || url === "CUSTOM"){
-        alert("Pehle recitation select karo ya custom URL add karo 🙂");
-        return;
-      }
-      try{
-        if(audio.src !== url) audio.src = url;
-        await audio.play();
-        setAudioUI(true);
-      }catch(e){
-        console.error(e);
-        alert("Audio play nahi ho raha. Link direct MP3/stream hona chahiye, ya browser policy issue ho sakta hai.");
-        setAudioUI(false);
-      }
-    });
-
-    pauseBtn.addEventListener("click", ()=>{
-      audio.pause();
-      setAudioUI(false);
-    });
-
-    audio.addEventListener("ended", ()=> setAudioUI(false));
-    audio.addEventListener("pause", ()=> setAudioUI(false));
-    audio.addEventListener("play", ()=> setAudioUI(true));
-
-    // restore last url if any
-    (function initAudio(){
-      const last = localStorage.getItem("quran_audio_url");
-      if(last){
-        const opt = document.createElement("option");
-        opt.value = last;
-        opt.textContent = `Last: ${last.slice(0,45)}${last.length>45?"…":""}`;
-        reciterSelect.appendChild(opt);
-        reciterSelect.value = last;
-      }
-    })();
-
-    // =========================
-    // Countdown + reveal
-    // =========================
+    // ====== Countdown + reveal ======
     let targetMaghrib = null;
     let timer = null;
 
@@ -763,12 +613,6 @@
       openBtn.textContent="🔐 Open Dua After Iftar";
     }
 
-    openBtn.addEventListener("click", ()=>{
-      reveal.style.display = "block";
-      openBtn.style.display = "none";
-      reveal.scrollIntoView({behavior:"smooth", block:"start"});
-    });
-
     function startCountdown(maghribStr){
       targetMaghrib = parseTimeToToday(maghribStr);
       if(timer) clearInterval(timer);
@@ -776,16 +620,21 @@
       timer = setInterval(tick, 1000);
     }
 
-    // =========================
-    // Ramadan calendar builder
-    // =========================
-    function renderCalendar(rows, todayY, todayM, todayD){
+    openBtn.addEventListener("click", ()=>{
+      reveal.style.display = "block";
+      openBtn.style.display = "none";
+      reveal.scrollIntoView({behavior:"smooth", block:"start"});
+    });
+
+    // ====== Ramadan calendar (city based) ======
+    function renderCalendar(rows){
+      const now = new Date();
+      const todayY = now.getFullYear(), todayM = now.getMonth()+1, todayD = now.getDate();
+
       tbody.innerHTML = "";
       for(const r of rows){
         const tr = document.createElement("tr");
-        const isToday = (r.gY===todayY && r.gM===todayM && r.gD===todayD);
-        if(isToday) tr.classList.add("today");
-
+        if(r.gY===todayY && r.gM===todayM && r.gD===todayD) tr.classList.add("today");
         tr.innerHTML = `
           <td>${r.gLabel}</td>
           <td class="muted">${r.hLabel}</td>
@@ -796,39 +645,31 @@
         tbody.appendChild(tr);
       }
       if(!rows.length){
-        tbody.innerHTML = `<tr><td colspan="5" class="muted">Ramadan days not found for this year. Try refresh or check location/city.</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" class="muted">Ramadan calendar not found. City change karke refresh try karo 🙂</td></tr>`;
       }
     }
 
     async function buildRamadanCalendarByCity(city){
-      // Determine upcoming/current Ramadan Hijri year from today's Hijri
-      const gtoh = await fetchGToH(todayISO());
+      const gtoh = await fetchGToH(todayDDMMYYYY());
       const todayHijri = gtoh?.hijri;
       if(!todayHijri) throw new Error("Hijri not available");
 
       const hYear = Number(todayHijri.year);
       const hMonth = Number(todayHijri.month?.number);
-
-      // choose hijri year: if month <= 9, same year, else next year
       const targetHijriYear = (hMonth <= RAMADAN_MONTH_NUM) ? hYear : (hYear + 1);
 
-      // Convert Ramadan start/end to Gregorian to know which months to fetch
-      const ramStart = await fetchHToG(`01-09-${targetHijriYear}`);  // 1 Ramadan
-      const ramEnd = await fetchHToG(`30-09-${targetHijriYear}`);    // 30 Ramadan (some years 29, API still handles)
+      const ramStart = await fetchHToG(`01-09-${targetHijriYear}`);
+      const ramEnd   = await fetchHToG(`30-09-${targetHijriYear}`);
+
       const gStart = ramStart?.gregorian;
       const gEnd = ramEnd?.gregorian;
-
-      if(!gStart || !gEnd) throw new Error("Ramadan range not resolved");
+      if(!gStart || !gEnd) throw new Error("Ramadan range unresolved");
 
       const startY = Number(gStart.year), startM = Number(gStart.month?.number);
       const endY = Number(gEnd.year), endM = Number(gEnd.month?.number);
 
-      // fetch one or two Gregorian months
-      const monthsToFetch = [];
-      monthsToFetch.push({y:startY, m:startM});
-      if(!(startY===endY && startM===endM)){
-        monthsToFetch.push({y:endY, m:endM});
-      }
+      const monthsToFetch = [{y:startY,m:startM}];
+      if(!(startY===endY && startM===endM)) monthsToFetch.push({y:endY,m:endM});
 
       let allDays = [];
       for(const item of monthsToFetch){
@@ -836,59 +677,29 @@
         allDays = allDays.concat(chunk);
       }
 
-      // filter only Ramadan days by Hijri month number
       const rows = allDays
         .filter(d => Number(d?.date?.hijri?.month?.number) === RAMADAN_MONTH_NUM && Number(d?.date?.hijri?.year) === targetHijriYear)
         .map(d=>{
           const g = d.date.gregorian;
           const h = d.date.hijri;
-          const gY = Number(g.year);
-          const gM = Number(g.month.number);
-          const gD = Number(g.day);
-          const gLabel = `${g.weekday.en}, ${g.day} ${g.month.en} ${g.year}`;
-          const hLabel = `${h.day} ${h.month.en} ${h.year}`;
-          const imsak = hhmm(d.timings?.Imsak);
-          const fajr = hhmm(d.timings?.Fajr);
-          const maghrib = hhmm(d.timings?.Maghrib);
-          return {gY,gM,gD,gLabel,hLabel,imsak,fajr,maghrib, raw:d};
+          const gY = Number(g.year), gM = Number(g.month.number), gD = Number(g.day);
+          return {
+            gY,gM,gD,
+            gLabel: `${g.weekday.en}, ${g.day} ${g.month.en} ${g.year}`,
+            hLabel: `${h.day} ${h.month.en} ${h.year}`,
+            imsak: hhmm(d.timings?.Imsak),
+            fajr: hhmm(d.timings?.Fajr),
+            maghrib: hhmm(d.timings?.Maghrib)
+          };
         })
-        .sort((a,b)=> (a.gY-a.gY) || (a.gM-b.gM) || (a.gD-b.gD));
+        .sort((a,b)=> (a.gY-b.gY) || (a.gM-b.gM) || (a.gD-b.gD));
 
       return { rows, targetHijriYear };
     }
 
-    // =========================
-    // Today section updater
-    // =========================
-    function setTodayUI(data){
-      const t = data?.timings || {};
-      const g = data?.date?.gregorian || {};
-      const h = data?.date?.hijri || {};
-
-      todayTag.textContent = `${g.weekday?.en || ""} • ${g.day || ""} ${g.month?.en || ""} ${g.year || ""}`.trim() || "Today";
-      fajrTime.textContent = hhmm(t.Fajr);
-      maghribTime.textContent = hhmm(t.Maghrib);
-      imsakNote.textContent = `Imsak: ${hhmm(t.Imsak)}`;
-      sunsetNote.textContent = `Sunset: ${hhmm(t.Sunset)}`;
-
-      // Ramadan day if hijri month is Ramadan
-      const isRam = Number(h.month?.number) === RAMADAN_MONTH_NUM;
-      hijriText.textContent = `Hijri: ${h.day || ""} ${h.month?.en || ""} ${h.year || ""}`.trim();
-      ramDay.textContent = isRam ? `Day ${h.day}` : "—";
-
-      // countdown to Maghrib
-      startCountdown(t.Maghrib);
-    }
-
-    // =========================
-    // Load / Save preference
-    // =========================
+    // ====== Save/Load pref ======
     function savePref(){
-      const pref = {
-        mode: modeEl.value,
-        city: citySelect.value,
-        customCity: customCity.value.trim()
-      };
+      const pref = { mode: modeEl.value, city: citySelect.value, customCity: customCity.value.trim() };
       localStorage.setItem(PREF_KEY, JSON.stringify(pref));
       statusLine.textContent = "Saved ✅ Ab next time automatically yahi preference use hogi.";
     }
@@ -915,24 +726,97 @@
       setModeUI();
     }
 
-    // =========================
-    // Main loader
-    // =========================
+    // ====== Quran Audio (built-in, no URL input) ======
+    let reciterCache = new Map(); // reciterId -> Map(chapterId -> audioUrl)
+
+    function setAudioUI(on){
+      if(on){
+        audioDot.classList.add("on");
+        audioState.textContent = "Audio: ON";
+      }else{
+        audioDot.classList.remove("on");
+        audioState.textContent = "Audio: OFF";
+      }
+    }
+
+    vol.addEventListener("input", ()=>{ audio.volume = Number(vol.value); });
+    audio.volume = Number(vol.value);
+
+    async function loadSurahList(){
+      const res = await fetch(Q_CHAPTERS);
+      const j = await res.json();
+      const chapters = j?.chapters || [];
+      surahSelect.innerHTML = "";
+      for(const c of chapters){
+        const opt = document.createElement("option");
+        opt.value = String(c.id);
+        opt.textContent = `${c.id} • ${c.name_simple}`;
+        surahSelect.appendChild(opt);
+      }
+      surahSelect.value = "1";
+    }
+
+    async function ensureReciterMap(reciterId){
+      if(reciterCache.has(reciterId)) return reciterCache.get(reciterId);
+
+      // This endpoint returns audio_files with chapter_id + audio_url
+      const res = await fetch(Q_CHAPTER_RECITATIONS(reciterId));
+      const j = await res.json();
+      const files = j?.audio_files || [];
+
+      const m = new Map();
+      for(const f of files){
+        if(f?.chapter_id && f?.audio_url) m.set(String(f.chapter_id), String(f.audio_url));
+      }
+      reciterCache.set(reciterId, m);
+      return m;
+    }
+
+    async function playSelected(){
+      const reciterId = reciterSelect.value;
+      const chapterId = surahSelect.value;
+
+      try{
+        playBtn.disabled = true;
+        const map = await ensureReciterMap(reciterId);
+        const url = map.get(String(chapterId));
+        if(!url){
+          alert("Is reciter ki is surah ki audio file nahi mili. Another reciter try karo 🙂");
+          return;
+        }
+        if(audio.src !== url) audio.src = url;
+        await audio.play();
+        setAudioUI(true);
+      }catch(e){
+        console.error(e);
+        alert("Audio play nahi ho rahi. Internet / browser autoplay restriction ho sakti hai.");
+        setAudioUI(false);
+      }finally{
+        playBtn.disabled = false;
+      }
+    }
+
+    playBtn.addEventListener("click", playSelected);
+    pauseBtn.addEventListener("click", ()=>{ audio.pause(); setAudioUI(false); });
+
+    audio.addEventListener("ended", ()=> setAudioUI(false));
+    audio.addEventListener("pause", ()=> setAudioUI(false));
+    audio.addEventListener("play", ()=> setAudioUI(true));
+
+    // Optional: warm cache for default (Sudais)
+    (async ()=>{ try{ await ensureReciterMap("3"); }catch{} })();
+
+    // ====== Main load ======
     async function loadAll(){
       loadBtn.disabled = true;
       calTag.textContent = "Loading…";
       reveal.style.display = "none";
       openBtn.style.display = "block";
       openBtn.disabled = true;
-      statusLine.textContent = "Loading timings…";
 
       try{
         const mode = modeEl.value;
-
-        const now = new Date();
-        const todayD = now.getDate();
-        const todayM = now.getMonth()+1;
-        const todayY = now.getFullYear();
+        const ddmmyyyy = todayDDMMYYYY();
 
         if(mode === "auto"){
           if(!navigator.geolocation) throw new Error("Geolocation not supported");
@@ -940,82 +824,62 @@
           let pos;
           try{
             pos = await new Promise((resolve, reject)=>{
-              navigator.geolocation.getCurrentPosition(resolve, reject, {
-                enableHighAccuracy:true,
-                timeout:12000
-              });
+              navigator.geolocation.getCurrentPosition(resolve, reject, { enableHighAccuracy:true, timeout:12000 });
             });
           }catch{
-            // fallback to city
             modeEl.value = "city";
             setModeUI();
             statusLine.textContent = "GPS blocked. City mode pe switch ho gaya — ab city select kar lo.";
             throw new Error("GPS blocked");
           }
 
-          const lat = pos.coords.latitude;
-          const lon = pos.coords.longitude;
+          const lat = pos.coords.latitude, lon = pos.coords.longitude;
           locTag.textContent = `📍 Auto (${lat.toFixed(3)}, ${lon.toFixed(3)})`;
 
-          const todayData = await fetchTimingsByGeoForDate(lat, lon, todayISO());
+          const todayData = await fetchTimingsByGeoForDate(lat, lon, ddmmyyyy);
           setTodayUI(todayData);
 
-          // Calendar by city is simpler than by geo (API has calendar by city). For geo calendar, we'd loop dates (heavy).
-          // So in auto mode: we still show "today" perfectly, and calendar loads by selected city as fallback
+          // Calendar always by city (lighter)
           const city = getCityFromUI();
           statusLine.textContent = `Aaj ka time GPS se. Poore Ramadan ka calendar city (${city}) se load ho raha hai…`;
           const cal = await buildRamadanCalendarByCity(city);
           calTag.textContent = `Ramadan ${cal.targetHijriYear}`;
-          renderCalendar(cal.rows, todayY, todayM, todayD);
+          renderCalendar(cal.rows);
 
         } else {
           const city = getCityFromUI();
           locTag.textContent = `📍 ${city}, ${DEFAULT_COUNTRY}`;
 
-          const todayData = await fetchTimingsByCityForDate(city, DEFAULT_COUNTRY, todayISO());
+          const todayData = await fetchTimingsByCityForDate(city, DEFAULT_COUNTRY, ddmmyyyy);
           setTodayUI(todayData);
 
           const cal = await buildRamadanCalendarByCity(city);
           calTag.textContent = `Ramadan ${cal.targetHijriYear}`;
-          renderCalendar(cal.rows, todayY, todayM, todayD);
+          renderCalendar(cal.rows);
 
           statusLine.textContent = `Loaded ✅ City: ${city}.`;
         }
 
-      } catch(e){
+      }catch(e){
         console.error(e);
-        if(String(e.message).includes("GPS blocked")){
-          // show a friendly nudge, but don’t crash
-          calTag.textContent = "Need city to load calendar";
-          tbody.innerHTML = `<tr><td colspan="5" class="muted">GPS blocked. City mode select karke “Refresh Times” dabao 🙂</td></tr>`;
-          todayTag.textContent = "GPS blocked";
-          fajrTime.textContent="--:--"; maghribTime.textContent="--:--";
-          imsakNote.textContent="Imsak: --:--"; sunsetNote.textContent="Sunset: --:--";
-          ramDay.textContent="—"; hijriText.textContent="Hijri: —";
-          openBtn.disabled = false;
-          openBtn.textContent = "Open Dua (Fallback)";
-        }else{
-          statusLine.textContent = "Load fail — internet check karo ya city mode try karo 🙂";
-          calTag.textContent = "Error";
-          openBtn.disabled = false;
-          openBtn.textContent = "Open Dua (Fallback)";
-        }
-      } finally {
+        statusLine.textContent = "Load fail — internet check karo ya city mode try karo 🙂";
+        calTag.textContent = "Error";
+        openBtn.disabled = false;
+        openBtn.textContent = "Open Dua (Fallback)";
+      }finally{
         loadBtn.disabled = false;
       }
     }
 
     loadBtn.addEventListener("click", loadAll);
 
-    // =========================
-    // Init
-    // =========================
-    (function init(){
+    // ====== Init ======
+    (async function init(){
       loadPref();
       setModeUI();
+      await loadSurahList();
       loadAll();
     })();
-
   </script>
 </body>
 </html>
