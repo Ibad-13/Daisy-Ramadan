@@ -3,42 +3,45 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Ramadan Companion • Rida Ayesha 🌙</title>
+  <title>Ramadan Premium • Rida Ayesha 🌙</title>
+
   <style>
     :root{
       --bg1:#050916; --bg2:#071a2a;
       --gold:#f7d37a; --gold2:#e8b84c;
-      --card: rgba(255,255,255,.09);
+      --card: rgba(255,255,255,.10);
       --border: rgba(255,255,255,.16);
-      --shadow: rgba(0,0,0,.38);
-      --ink: rgba(255,255,255,.92);
+      --shadow: rgba(0,0,0,.44);
+      --ink: rgba(255,255,255,.94);
       --muted: rgba(255,255,255,.72);
-      --muted2: rgba(255,255,255,.56);
+      --muted2: rgba(255,255,255,.55);
+      --good:#45ff9a; --bad:#ff5a5a;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--ink);
-      background: radial-gradient(1200px 720px at 65% 5%, #143a64 0%, transparent 55%),
-                  radial-gradient(900px 600px at 10% 20%, #17295c 0%, transparent 58%),
-                  linear-gradient(160deg, var(--bg1), var(--bg2));
+      background:
+        radial-gradient(1200px 720px at 65% 5%, #143a64 0%, transparent 55%),
+        radial-gradient(900px 600px at 10% 20%, #17295c 0%, transparent 58%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
       overflow-x:hidden;
     }
 
-    /* Kaaba background (direct, no need to download) */
+    /* Kaaba background */
     .kaaba-bg{
       position:fixed; inset:0;
       background:
-        linear-gradient(180deg, rgba(0,0,0,.62), rgba(0,0,0,.70)),
+        linear-gradient(180deg, rgba(0,0,0,.68), rgba(0,0,0,.78)),
         url("https://upload.wikimedia.org/wikipedia/commons/6/67/Kaaba_Masjid_Haraam_Makkah.jpg") center/cover no-repeat;
-      filter: saturate(1.05) contrast(1.05);
-      opacity:.58;
+      opacity:.62;
       z-index:-3;
+      filter: saturate(1.06) contrast(1.06);
     }
 
-    /* Star + arabic vibe overlay */
+    /* sparkle overlay */
     .pattern{
       position:fixed; inset:0;
       pointer-events:none;
@@ -55,11 +58,10 @@
     }
     @keyframes twinkle{ from{opacity:.35} to{opacity:.65} }
 
-    .wrap{ max-width:1100px; margin:0 auto; padding:20px 16px 60px; }
+    .wrap{ max-width:1180px; margin:0 auto; padding:18px 14px 60px; }
 
     .topbar{
-      display:flex; align-items:center; justify-content:space-between; gap:14px;
-      margin-bottom:12px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
       flex-wrap:wrap;
     }
     .brand{
@@ -67,45 +69,52 @@
       min-width:260px;
     }
     .badge{
-      width:46px; height:46px; border-radius:16px;
+      width:50px; height:50px; border-radius:18px;
       display:grid; place-items:center;
       background: rgba(255,255,255,.10);
       border:1px solid var(--border);
-      box-shadow: 0 12px 26px var(--shadow);
+      box-shadow: 0 14px 34px var(--shadow);
+      font-size:22px;
+      backdrop-filter: blur(10px);
     }
-    .brand h1{ margin:0; font-size:16px; font-weight:900; letter-spacing:.2px; }
+    .brand h1{ margin:0; font-size:16px; font-weight:1000; letter-spacing:.2px; }
     .brand p{ margin:2px 0 0; font-size:12px; color:var(--muted2) }
 
-    /* Dua marquee */
+    /* Dua ticker */
     .marquee{
-      flex:1; min-width: 260px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.15);
-      background: rgba(0,0,0,.22);
+      flex:1; min-width: 280px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.24);
       overflow:hidden;
       box-shadow: 0 10px 26px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
     }
+    .marquee:hover .track{ animation-play-state: paused; }
     .marquee .track{
       display:flex;
-      gap:48px;
+      gap:52px;
       width:max-content;
-      padding:10px 14px;
+      padding:12px 14px;
       align-items:center;
       white-space:nowrap;
-      animation: scroll 18s linear infinite;
-      color: rgba(255,255,255,.84);
+      animation: scroll 22s linear infinite;
+      color: rgba(255,255,255,.92);
+      font-size:14px;
+      letter-spacing:.15px;
     }
     @keyframes scroll{ from{ transform: translateX(0) } to{ transform: translateX(-50%) } }
-    .marquee span{ font-size:13px; letter-spacing:.2px }
 
-    .audioDock{
+    /* Controls */
+    .dock{
       display:flex; align-items:center; gap:10px;
       padding:10px 12px;
-      border-radius:16px;
+      border-radius:18px;
       border:1px solid rgba(255,255,255,.15);
-      background: rgba(255,255,255,.08);
+      background: rgba(255,255,255,.09);
       box-shadow: 0 10px 26px rgba(0,0,0,.22);
       flex-wrap:wrap;
+      backdrop-filter: blur(10px);
     }
     .btn{
       border:1px solid rgba(255,255,255,.16);
@@ -120,8 +129,8 @@
     }
     .btn:hover{ transform: translateY(-1px); filter:brightness(1.06) }
     .btn.primary{
-      background: linear-gradient(180deg, rgba(247,211,122,.24), rgba(247,211,122,.10));
-      border-color: rgba(247,211,122,.25);
+      background: linear-gradient(180deg, rgba(247,211,122,.28), rgba(247,211,122,.10));
+      border-color: rgba(247,211,122,.28);
     }
     .btn:disabled{ opacity:.55; cursor:not-allowed; transform:none }
 
@@ -133,6 +142,7 @@
       color:var(--ink);
       outline:none;
       min-width: 160px;
+      backdrop-filter: blur(10px);
     }
     .select option{ color:#000; }
 
@@ -142,23 +152,24 @@
       border-radius:999px;
       border:1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.18);
-      color: rgba(255,255,255,.82);
+      color: rgba(255,255,255,.84);
       font-size:12px;
       white-space:nowrap;
+      backdrop-filter: blur(10px);
     }
     .dot{
       width:10px; height:10px; border-radius:50%;
-      background:#ff5a5a;
+      background:var(--bad);
       box-shadow: 0 0 16px rgba(255,90,90,.8);
     }
     .dot.on{
-      background:#45ff9a;
+      background:var(--good);
       box-shadow: 0 0 16px rgba(69,255,154,.85);
     }
 
     .grid{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns: 1.1fr .9fr;
       gap:14px;
       margin-top:12px;
       align-items:start;
@@ -166,11 +177,12 @@
     @media (max-width: 980px){ .grid{ grid-template-columns:1fr } }
 
     .card{
-      border-radius:22px;
+      border-radius:24px;
       border:1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.08);
-      box-shadow: 0 18px 45px rgba(0,0,0,.26);
+      background: rgba(255,255,255,.09);
+      box-shadow: 0 18px 55px rgba(0,0,0,.30);
       overflow:hidden;
+      backdrop-filter: blur(12px);
     }
     .card .head{
       padding:14px 14px 10px;
@@ -187,7 +199,7 @@
     }
     .card .body{ padding:14px; }
 
-    .vibe{ display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; }
+    .vibe{ display:flex; gap:10px; flex-wrap:wrap; margin-top:8px; }
     .vibe .pill{
       border-radius:18px;
       border:1px solid rgba(247,211,122,.22);
@@ -195,7 +207,7 @@
       padding:10px 12px;
       font-size:13px;
       display:flex; align-items:center; gap:8px;
-      color: rgba(255,255,255,.88);
+      color: rgba(255,255,255,.90);
     }
 
     .tiles{
@@ -213,7 +225,7 @@
       position:relative;
       overflow:hidden;
     }
-    .tile b{ display:block; font-size:12px; color: rgba(255,255,255,.70); letter-spacing:.2px }
+    .tile b{ display:block; font-size:12px; color: rgba(255,255,255,.72); letter-spacing:.2px }
     .tile .big{ margin-top:8px; font-size:24px; font-weight:1000; letter-spacing:.4px; }
     .tile small{ display:block; margin-top:6px; color: rgba(255,255,255,.60) }
     .glow{
@@ -235,7 +247,7 @@
     .tbox .num{ font-size:26px; font-weight:1000; letter-spacing:.4px }
     .tbox .lbl{ font-size:11px; color: rgba(255,255,255,.65); margin-top:2px }
 
-    .note{ margin-top:8px; color: rgba(255,255,255,.66); font-size:12px; line-height:1.5; }
+    .note{ margin-top:8px; color: rgba(255,255,255,.68); font-size:12px; line-height:1.55; }
 
     .tableWrap{
       overflow:auto;
@@ -243,21 +255,21 @@
       border:1px solid rgba(255,255,255,.12);
       background: rgba(0,0,0,.16);
     }
-    table{ width:100%; border-collapse:collapse; min-width:720px; }
+    table{ width:100%; border-collapse:collapse; min-width:760px; }
     th,td{
       padding:10px 10px;
       border-bottom:1px solid rgba(255,255,255,.10);
       font-size:13px;
-      color: rgba(255,255,255,.84);
+      color: rgba(255,255,255,.86);
       text-align:left;
     }
     th{
       position:sticky; top:0;
-      background: rgba(0,0,0,.35);
-      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,.36);
+      backdrop-filter: blur(8px);
       z-index:1;
       font-size:12px;
-      color: rgba(255,255,255,.72);
+      color: rgba(255,255,255,.74);
       letter-spacing:.2px;
     }
     tr.today{
@@ -265,10 +277,73 @@
       outline-offset:-2px;
       background: rgba(247,211,122,.08);
     }
-    .muted{ color: rgba(255,255,255,.58) }
+
+    .sectionGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    @media (max-width: 980px){ .sectionGrid{ grid-template-columns:1fr } }
+
+    .box{
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      padding:12px;
+    }
+    .box h3{ margin:0 0 8px; font-size:13px; font-weight:1000; color:rgba(255,255,255,.92); }
+    .box .arabic{
+      font-size:16px;
+      line-height:1.9;
+      direction:rtl;
+      text-align:right;
+      color: rgba(255,255,255,.94);
+    }
+    .box .translit{ margin-top:8px; font-size:13px; color: rgba(255,255,255,.84); line-height:1.6; }
+    .box .meaning{ margin-top:8px; font-size:12px; color: rgba(255,255,255,.70); line-height:1.6; }
+
+    .yt{
+      width:100%;
+      aspect-ratio: 16 / 9;
+      border:0;
+      border-radius:16px;
+      overflow:hidden;
+      background:#000;
+    }
+
+    /* Specials modal */
+    .modal{
+      position:fixed; inset:0;
+      background: rgba(0,0,0,.62);
+      display:none;
+      align-items:center; justify-content:center;
+      padding:18px;
+      z-index:999;
+    }
+    .modal .panel{
+      max-width:720px;
+      width:100%;
+      border-radius:24px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(10,14,26,.82);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 25px 80px rgba(0,0,0,.55);
+      overflow:hidden;
+    }
+    .modal .panel .mhead{
+      padding:14px 14px 10px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .modal .panel .mhead b{ font-size:14px; letter-spacing:.2px; }
+    .modal .panel .mbody{ padding:14px; }
+    .modal .panel .mbody p{ margin:0; color:rgba(255,255,255,.86); line-height:1.7; font-size:13px; }
+
     .footer{ margin-top:14px; text-align:center; color: rgba(255,255,255,.55); font-size:12px; }
+    code{ color: rgba(247,211,122,.92); }
   </style>
 </head>
+
 <body>
   <div class="kaaba-bg"></div>
   <div class="pattern"></div>
@@ -278,43 +353,30 @@
       <div class="brand">
         <div class="badge">🕋</div>
         <div>
-          <h1>Ramadan Companion • Rida Ayesha</h1>
-          <p>Dynamic Sehri & Iftar + Quran Audio • City/Location based</p>
+          <h1>Ramadan Premium • Rida Ayesha</h1>
+          <p>Sehri/Iftar + Namaz Timings + Quran Radio + Duas + Hadith • GPS/City</p>
         </div>
       </div>
 
-      <div class="marquee" title="Dua marquee">
-        <div class="track">
+      <div class="marquee" title="Hover to pause">
+        <div class="track" id="duaTrack">
           <span>اللَّهُمَّ بَلِّغْنَا رَمَضَانَ</span>
           <span>اللَّهُمَّ تَقَبَّلْ مِنَّا الصِّيَامَ وَالْقِيَامَ</span>
           <span>رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ</span>
+          <span>اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي</span>
           <span>اللَّهُمَّ بَلِّغْنَا رَمَضَانَ</span>
           <span>اللَّهُمَّ تَقَبَّلْ مِنَّا الصِّيَامَ وَالْقِيَامَ</span>
-          <span>رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ</span>
         </div>
       </div>
 
-      <!-- Quran Audio (NO add-url, built-in API based) -->
-      <div class="audioDock">
-        <span class="chip"><span class="dot" id="audioDot"></span><span id="audioState">Audio: OFF</span></span>
-
-        <select class="select" id="reciterSelect" title="Reciter">
-          <option value="3" selected>Abdur-Rahman as-Sudais</option>
-          <option value="10">Sa‘ud ash-Shuraym</option>
-          <option value="7">Mishari Rashid al-‘Afasy</option>
-          <option value="4">Abu Bakr al-Shatri</option>
-          <option value="5">Hani ar-Rifai</option>
-          <option value="2">AbdulBaset (Murattal)</option>
-        </select>
-
-        <select class="select" id="surahSelect" title="Surah">
-          <option value="1">1 • Al-Fatihah</option>
-        </select>
-
+      <!-- Quran Radio -->
+      <div class="dock">
+        <span class="chip"><span class="dot" id="audioDot"></span><span id="audioState">Quran Radio: OFF</span></span>
+        <select class="select" id="surahSelect" title="Surah"></select>
         <button class="btn primary" id="playBtn">▶ Play</button>
         <button class="btn" id="pauseBtn">⏸ Pause</button>
-
-        <input class="input" id="vol" type="range" min="0" max="1" step="0.05" value="0.75" title="Volume" style="min-width:140px;">
+        <button class="btn" id="nextBtn" title="Next Surah">⏭ Next</button>
+        <input class="input" id="vol" type="range" min="0" max="1" step="0.05" value="0.85" title="Volume" style="min-width:140px;">
       </div>
     </div>
 
@@ -322,10 +384,11 @@
       <!-- LEFT -->
       <div class="card">
         <div class="head">
-          <h2>🌙 Aaj ka Sehri & Iftar</h2>
+          <h2>🌙 Aaj ka Sehri, Iftar & Namaz</h2>
           <div style="display:flex; gap:8px; flex-wrap:wrap;">
             <span class="chip" id="todayTag">Loading…</span>
             <span class="chip" id="locTag">📍 —</span>
+            <span class="chip" id="rozaTag">Roza #: —</span>
           </div>
         </div>
 
@@ -333,28 +396,43 @@
           <div class="vibe">
             <div class="pill">🕯️ Candle vibes</div>
             <div class="pill">🌴 Dates ready</div>
-            <div class="pill">✨ Arabic ambiance</div>
+            <div class="pill">✨ Premium Arabic glass look</div>
           </div>
 
           <div class="tiles">
             <div class="tile">
               <b>Sehri ends (Fajr)</b>
               <div class="big" id="fajrTime">--:--</div>
-              <small class="muted" id="imsakNote">Imsak: --:--</small>
+              <small id="imsakNote">Imsak: --:--</small>
               <div class="glow"></div>
             </div>
             <div class="tile">
               <b>Iftar (Maghrib)</b>
               <div class="big" id="maghribTime">--:--</div>
-              <small class="muted" id="sunsetNote">Sunset: --:--</small>
+              <small id="sunsetNote">Sunset: --:--</small>
               <div class="glow"></div>
             </div>
             <div class="tile">
-              <b>Ramadan Day</b>
-              <div class="big" id="ramDay">—</div>
-              <small class="muted" id="hijriText">Hijri: —</small>
+              <b>Eid Countdown</b>
+              <div class="big" id="eidCountdown">--:--</div>
+              <small id="eidDateText">Eid date: —</small>
               <div class="glow"></div>
             </div>
+          </div>
+
+          <div style="margin-top:10px" class="box">
+            <h3>🕌 Namaz Timings (Today)</h3>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <span class="chip">Fajr: <b id="ptFajr">--:--</b></span>
+              <span class="chip">Dhuhr: <b id="ptDhuhr">--:--</b></span>
+              <span class="chip">Asr: <b id="ptAsr">--:--</b></span>
+              <span class="chip">Maghrib: <b id="ptMaghrib">--:--</b></span>
+              <span class="chip">Isha: <b id="ptIsha">--:--</b></span>
+            </div>
+            <div style="margin-top:10px;">
+              <span class="chip">Next Prayer: <b id="nextPrayerName">—</b> at <b id="nextPrayerTime">—</b></span>
+            </div>
+            <div class="note" id="nextPrayerNote">Next prayer countdown neeche.</div>
           </div>
 
           <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
@@ -376,43 +454,113 @@
 
             <input class="input" id="customCity" placeholder="Custom city (optional)" disabled />
 
-            <button class="btn primary" id="loadBtn">🔄 Refresh Times</button>
+            <button class="btn primary" id="loadBtn">🔄 Refresh</button>
             <button class="btn" id="saveBtn">💾 Save</button>
           </div>
 
-          <div class="note" id="statusLine">
-            Tip: GPS allow kar do to city change automatically ho jayegi (Karachi → Islamabad etc).
+          <!-- Pakistan Ramadan Start Date (Roza # fix) -->
+          <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+            <span class="chip">🇵🇰 Pakistan Ramadan Start</span>
+            <input class="input" id="pakStart" type="date" style="min-width:170px;">
+            <button class="btn" id="setPakStartBtn">✅ Set</button>
+            <span class="chip" id="pakStartHint">Tip: set kar do, Roza # sahi ho jayega</span>
           </div>
 
+          <div class="note" id="statusLine">
+            GPS allow kar do to location automatic update hoti rahegi.
+          </div>
+
+          <!-- Dual countdowns -->
           <div style="margin-top:12px;">
-            <h3 style="margin:0 0 8px; font-size:14px; font-weight:1000;">⏳ Iftar tak countdown</h3>
-            <div class="countRow">
-              <div class="tbox"><div class="num" id="hh">--</div><div class="lbl">Hours</div></div>
-              <div class="tbox"><div class="num" id="mm">--</div><div class="lbl">Minutes</div></div>
-              <div class="tbox"><div class="num" id="ss">--</div><div class="lbl">Seconds</div></div>
+            <h3 style="margin:0 0 8px; font-size:14px; font-weight:1000;">⏳ Countdown</h3>
+
+            <div class="sectionGrid">
+              <div class="box">
+                <h3>🌇 Iftar (Maghrib) Countdown</h3>
+                <div class="countRow">
+                  <div class="tbox"><div class="num" id="if_hh">--</div><div class="lbl">Hours</div></div>
+                  <div class="tbox"><div class="num" id="if_mm">--</div><div class="lbl">Minutes</div></div>
+                  <div class="tbox"><div class="num" id="if_ss">--</div><div class="lbl">Seconds</div></div>
+                </div>
+                <button class="btn primary" id="openBtn" disabled style="width:100%; margin-top:10px;">🔐 Open Iftar Dua</button>
+              </div>
+
+              <div class="box">
+                <h3>🕌 Next Prayer Countdown</h3>
+                <div class="countRow">
+                  <div class="tbox"><div class="num" id="np_hh">--</div><div class="lbl">Hours</div></div>
+                  <div class="tbox"><div class="num" id="np_mm">--</div><div class="lbl">Minutes</div></div>
+                  <div class="tbox"><div class="num" id="np_ss">--</div><div class="lbl">Seconds</div></div>
+                </div>
+                <div class="note" id="np_hint">—</div>
+              </div>
             </div>
 
-            <button class="btn primary" id="openBtn" disabled style="width:100%; margin-top:10px;">🔐 Open Dua After Iftar</button>
-
             <div class="card" id="reveal" style="display:none; margin-top:10px;">
-              <div class="head"><h2>🤍 Iftar Dua & Message</h2></div>
+              <div class="head"><h2>🤍 Iftar Dua</h2></div>
               <div class="body">
-                <div style="border-radius:18px; border:1px solid rgba(255,255,255,.12); background:rgba(0,0,0,.18); padding:12px; line-height:1.8;">
-                  <div style="font-size:14px;">
-                    ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ
-                  </div>
-                  <div class="muted" style="margin-top:6px; font-size:13px;">
-                    (Pyaas chali gayi, ragon me tarawat aa gayi, aur ajar InshaAllah sabit ho gaya.)
-                  </div>
+                <div class="box">
+                  <div class="arabic">ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الأَجْرُ إِنْ شَاءَ اللَّهُ</div>
+                  <div class="translit">Zahabaz-zama’u wabtallatil-‘urooqu wa thabatal-ajru in shaa’ Allah.</div>
+                  <div class="meaning">Pyaas chali gayi, ragon me tarawat aa gayi, aur ajar InshaAllah sabit ho gaya.</div>
                 </div>
+              </div>
+            </div>
+          </div>
 
-                <div style="margin-top:10px; border-radius:18px; border:1px solid rgba(247,211,122,.25); background:rgba(247,211,122,.10); padding:12px; line-height:1.7;">
-                  Rida Ayesha, Allah hamare ghar ko barkat, sukoon aur mohabbat se bhar de. Ameen. 🌙🤍
+          <!-- Hadith + Duas -->
+          <div style="margin-top:14px;" class="sectionGrid">
+            <div class="card">
+              <div class="head"><h2>📜 Hadith of the Day</h2><span class="chip" id="hadithRef">Loading…</span></div>
+              <div class="body">
+                <div class="box">
+                  <div style="font-size:13px; line-height:1.7; color:rgba(255,255,255,.90);" id="hadithText">
+                    Loading hadith…
+                  </div>
+                  <div class="note" id="hadithNote">Source: Urdu (API). Agar load fail ho to refresh.</div>
                 </div>
               </div>
             </div>
 
+            <div class="card">
+              <div class="head">
+                <h2>🤲 Masnoon Duas (Search + Auto)</h2>
+                <span class="chip" id="duaCount">—</span>
+              </div>
+              <div class="body">
+                <input class="input" id="duaSearch" placeholder="Search: iftar, sehri, laylatul qadr..." style="width:100%; min-width:auto;">
+                <div style="margin-top:10px;" class="box">
+                  <div class="arabic" id="duaArabic">—</div>
+                  <div class="translit" id="duaTranslit">—</div>
+                  <div class="meaning" id="duaMeaning">—</div>
+                  <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+                    <button class="btn" id="duaPrev">⬅ Prev</button>
+                    <button class="btn primary" id="duaAuto">⏯ Auto: ON</button>
+                    <button class="btn" id="duaNext">Next ➡</button>
+                  </div>
+                  <div class="note" id="duaMeta">Auto rotates every 15 seconds (pause: Auto button).</div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <!-- Ramadan Specials -->
+          <div style="margin-top:14px;" class="card">
+            <div class="head"><h2>✨ Ramadan Specials (Day 10 / 20 / 27)</h2><span class="chip" id="specialsTag">—</span></div>
+            <div class="body">
+              <div class="box">
+                <div class="note" id="specialsNote">
+                  Pakistan Ramadan Start date set karne ke baad, day 10/20/27 pe special message auto unlock ho jayega.
+                </div>
+                <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;">
+                  <button class="btn" id="openSpecial10">Open Day 10</button>
+                  <button class="btn" id="openSpecial20">Open Day 20</button>
+                  <button class="btn" id="openSpecial27">Open Day 27</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -435,41 +583,88 @@
                 </tr>
               </thead>
               <tbody id="tbody">
-                <tr><td colspan="5" class="muted">Loading Ramadan calendar…</td></tr>
+                <tr><td colspan="5" style="color:rgba(255,255,255,.6)">Loading Ramadan calendar…</td></tr>
               </tbody>
             </table>
           </div>
 
           <div class="note">
-            Sehri usually Fajr se pehle hoti hai — is liye table me <b>Imsak</b> aur <b>Fajr</b> dono show ho rahe hain.
-            (Masjid/local roza timetable me 1–3 minutes ka farq ho sakta hai.)
+            Note: masjid/local timetable me 1–3 minutes ka farq ho sakta hai.
           </div>
+
+          <!-- Naat/Hamd embeds -->
+          <div style="margin-top:12px;" class="card">
+            <div class="head"><h2>🎧 Naat / Hamd (YouTube)</h2><span class="chip">Tap to play</span></div>
+            <div class="body" style="display:grid; gap:10px;">
+              <div class="box">
+                <h3>Atif Aslam • Tajdar-e-Haram</h3>
+                <iframe class="yt" src="https://www.youtube-nocookie.com/embed/a18py61_F_w" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+
+              <div class="box">
+                <h3>Maher Zain • Playlist</h3>
+                <iframe class="yt" src="https://www.youtube-nocookie.com/embed/videoseries?list=PLzVyR2YF2-aTV2L30owqbngIGLOCuQ3AS" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+
+              <div class="box">
+                <h3>Sami Yusuf • Playlist</h3>
+                <iframe class="yt" src="https://www.youtube-nocookie.com/embed/videoseries?list=PLXtpiHHJZ8L1QB67m2m78X-iOQZGjlz_O" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+
+              <div class="box">
+                <h3>Junaid Jamshed • Playlist</h3>
+                <iframe class="yt" src="https://www.youtube-nocookie.com/embed/videoseries?list=PLh--N1P3kBOhAjWTxPwzlb6prTqPmOS40" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
 
     <div class="footer">
-      Built with ❤️ • Timings via AlAdhan API • Quran Audio via Quran.com/QuranFoundation APIs
+      Timings via AlAdhan • Quran Radio via QuranicAudio (Sudais) • Hadith via hadith-api (cdn)
+    </div>
+  </div>
+
+  <!-- Specials Modal -->
+  <div class="modal" id="modal">
+    <div class="panel">
+      <div class="mhead">
+        <b id="modalTitle">Special</b>
+        <button class="btn" id="modalClose">✖</button>
+      </div>
+      <div class="mbody">
+        <p id="modalText">—</p>
+      </div>
     </div>
   </div>
 
   <audio id="quranAudio" crossorigin="anonymous"></audio>
 
   <script>
-    // ====== CONFIG ======
-    const METHOD = 1;                 // Prayer time calc method (Pakistan-friendly)
+    // =========================
+    // SETTINGS
+    // =========================
+    const METHOD = 1; // Karachi method
     const DEFAULT_COUNTRY = "Pakistan";
-    const PREF_KEY = "ramadan_pref_v2";
-    const RAMADAN_MONTH_NUM = 9;
+    const PREF_KEY = "ramadan_premium_pref_v2";
+    const PAK_START_KEY = "pak_ramadan_start_date_v2"; // YYYY-MM-DD
 
-    // Quran.com / QuranFoundation endpoints
-    const Q_CHAPTERS = "https://api.quran.com/api/v4/chapters";
-    const Q_RECITATIONS = "https://api.quran.com/api/v4/resources/recitations";
-    const Q_CHAPTER_RECITATIONS = (reciterId) => `https://api.quran.com/api/v4/chapter_recitations/${reciterId}`;
+    // Quran radio: Sudais MP3
+    const QARI_DIR = "abdurrahmaan_as-sudays";
+    const QURAN_AUDIO_BASE = `https://download.quranicaudio.com/quran/${QARI_DIR}/`;
 
-    // ====== UI refs ======
+    // Hadith of the day (Urdu) via jsdelivr hadith-api
+    const HADITH_EDITION = "urd-tirmidhi";
+    const HADITH_BASE = `https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@1/editions/${HADITH_EDITION}`;
+
+    // =========================
+    // UI
+    // =========================
     const todayTag = document.getElementById("todayTag");
     const locTag = document.getElementById("locTag");
+    const rozaTag = document.getElementById("rozaTag");
     const calTag = document.getElementById("calTag");
     const statusLine = document.getElementById("statusLine");
 
@@ -477,8 +672,18 @@
     const maghribTime = document.getElementById("maghribTime");
     const imsakNote = document.getElementById("imsakNote");
     const sunsetNote = document.getElementById("sunsetNote");
-    const ramDay = document.getElementById("ramDay");
-    const hijriText = document.getElementById("hijriText");
+
+    const eidCountdown = document.getElementById("eidCountdown");
+    const eidDateText = document.getElementById("eidDateText");
+
+    const ptFajr = document.getElementById("ptFajr");
+    const ptDhuhr = document.getElementById("ptDhuhr");
+    const ptAsr = document.getElementById("ptAsr");
+    const ptMaghrib = document.getElementById("ptMaghrib");
+    const ptIsha = document.getElementById("ptIsha");
+    const nextPrayerName = document.getElementById("nextPrayerName");
+    const nextPrayerTime = document.getElementById("nextPrayerTime");
+    const nextPrayerNote = document.getElementById("nextPrayerNote");
 
     const modeEl = document.getElementById("mode");
     const citySelect = document.getElementById("citySelect");
@@ -486,24 +691,63 @@
     const loadBtn = document.getElementById("loadBtn");
     const saveBtn = document.getElementById("saveBtn");
 
-    const hh = document.getElementById("hh");
-    const mm = document.getElementById("mm");
-    const ss = document.getElementById("ss");
+    const pakStart = document.getElementById("pakStart");
+    const setPakStartBtn = document.getElementById("setPakStartBtn");
+    const pakStartHint = document.getElementById("pakStartHint");
+
     const openBtn = document.getElementById("openBtn");
     const reveal = document.getElementById("reveal");
     const tbody = document.getElementById("tbody");
 
-    // Audio UI
+    const hadithRef = document.getElementById("hadithRef");
+    const hadithText = document.getElementById("hadithText");
+    const hadithNote = document.getElementById("hadithNote");
+
+    const duaSearch = document.getElementById("duaSearch");
+    const duaCount = document.getElementById("duaCount");
+    const duaArabic = document.getElementById("duaArabic");
+    const duaTranslit = document.getElementById("duaTranslit");
+    const duaMeaning = document.getElementById("duaMeaning");
+    const duaPrev = document.getElementById("duaPrev");
+    const duaNext = document.getElementById("duaNext");
+    const duaAutoBtn = document.getElementById("duaAuto");
+    const duaMeta = document.getElementById("duaMeta");
+
+    const specialsTag = document.getElementById("specialsTag");
+    const openSpecial10 = document.getElementById("openSpecial10");
+    const openSpecial20 = document.getElementById("openSpecial20");
+    const openSpecial27 = document.getElementById("openSpecial27");
+
+    // Modal
+    const modal = document.getElementById("modal");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalText = document.getElementById("modalText");
+    const modalClose = document.getElementById("modalClose");
+
+    // Countdown UI (Iftar)
+    const if_hh = document.getElementById("if_hh");
+    const if_mm = document.getElementById("if_mm");
+    const if_ss = document.getElementById("if_ss");
+    // Countdown UI (Next Prayer)
+    const np_hh = document.getElementById("np_hh");
+    const np_mm = document.getElementById("np_mm");
+    const np_ss = document.getElementById("np_ss");
+    const np_hint = document.getElementById("np_hint");
+
+    // Quran Radio UI
     const audio = document.getElementById("quranAudio");
-    const reciterSelect = document.getElementById("reciterSelect");
+    const audioDot = document.getElementById("audioDot");
+    const audioState = document.getElementById("audioState");
     const surahSelect = document.getElementById("surahSelect");
     const playBtn = document.getElementById("playBtn");
     const pauseBtn = document.getElementById("pauseBtn");
+    const nextBtn = document.getElementById("nextBtn");
     const vol = document.getElementById("vol");
-    const audioDot = document.getElementById("audioDot");
-    const audioState = document.getElementById("audioState");
+    audio.volume = Number(vol.value);
 
-    // ====== Helpers ======
+    // =========================
+    // HELPERS
+    // =========================
     const pad = (n)=> String(n).padStart(2,"0");
     const hhmm = (str)=> (str ? String(str).trim().slice(0,5) : "--:--");
 
@@ -511,28 +755,35 @@
       const d = new Date();
       return `${pad(d.getDate())}-${pad(d.getMonth()+1)}-${d.getFullYear()}`;
     }
-
-    function parseTimeToToday(timeStr){
+    function addDays(date, days){
+      const d = new Date(date);
+      d.setDate(d.getDate() + days);
+      return d;
+    }
+    function ddmmyyyyFromDate(d){
+      return `${pad(d.getDate())}-${pad(d.getMonth()+1)}-${d.getFullYear()}`;
+    }
+    function parseTimeOnDate(dateObj, timeStr){
       const clean = hhmm(timeStr);
       const [H,M] = clean.split(":").map(Number);
-      const d = new Date();
+      const d = new Date(dateObj);
       d.setHours(H, M, 0, 0);
       return d;
     }
-
     function setModeUI(){
       const isCity = modeEl.value === "city";
       citySelect.disabled = !isCity;
       customCity.disabled = !isCity;
     }
     modeEl.addEventListener("change", setModeUI);
-
     function getCityFromUI(){
       const c = customCity.value.trim();
       return c.length ? c : citySelect.value;
     }
 
-    // ====== AlAdhan API ======
+    // =========================
+    // AlAdhan API
+    // =========================
     async function fetchTimingsByCityForDate(city, country, ddmmyyyy){
       const url = `https://api.aladhan.com/v1/timingsByCity/${encodeURIComponent(ddmmyyyy)}?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&method=${METHOD}`;
       const res = await fetch(url);
@@ -540,7 +791,6 @@
       const j = await res.json();
       return j?.data;
     }
-
     async function fetchTimingsByGeoForDate(lat, lon, ddmmyyyy){
       const url = `https://api.aladhan.com/v1/timings/${encodeURIComponent(ddmmyyyy)}?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&method=${METHOD}`;
       const res = await fetch(url);
@@ -548,7 +798,6 @@
       const j = await res.json();
       return j?.data;
     }
-
     async function fetchCalendarByCity(month, year, city, country){
       const url = `https://api.aladhan.com/v1/calendarByCity/${year}/${month}?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&method=${METHOD}`;
       const res = await fetch(url);
@@ -556,7 +805,6 @@
       const j = await res.json();
       return j?.data || [];
     }
-
     async function fetchGToH(ddmmyyyy){
       const url = `https://api.aladhan.com/v1/gToH/${encodeURIComponent(ddmmyyyy)}`;
       const res = await fetch(url);
@@ -564,7 +812,6 @@
       const j = await res.json();
       return j?.data;
     }
-
     async function fetchHToG(hijriDDMMYYYY){
       const url = `https://api.aladhan.com/v1/hToG/${encodeURIComponent(hijriDDMMYYYY)}`;
       const res = await fetch(url);
@@ -573,51 +820,63 @@
       return j?.data;
     }
 
-    // ====== Today UI ======
-    function setTodayUI(data){
-      const t = data?.timings || {};
-      const g = data?.date?.gregorian || {};
-      const h = data?.date?.hijri || {};
+    // =========================
+    // Pakistan Ramadan Start (Roza # fix)
+    // =========================
+    function getPakStart(){ return localStorage.getItem(PAK_START_KEY) || ""; }
+    function setPakStart(yyyy_mm_dd){ localStorage.setItem(PAK_START_KEY, yyyy_mm_dd); }
 
-      todayTag.textContent = `${g.weekday?.en || ""} • ${g.day || ""} ${g.month?.en || ""} ${g.year || ""}`.trim() || "Today";
-      fajrTime.textContent = hhmm(t.Fajr);
-      maghribTime.textContent = hhmm(t.Maghrib);
-      imsakNote.textContent = `Imsak: ${hhmm(t.Imsak)}`;
-      sunsetNote.textContent = `Sunset: ${hhmm(t.Sunset)}`;
-
-      const isRam = Number(h.month?.number) === RAMADAN_MONTH_NUM;
-      hijriText.textContent = `Hijri: ${h.day || ""} ${h.month?.en || ""} ${h.year || ""}`.trim();
-      ramDay.textContent = isRam ? `Day ${h.day}` : "—";
-
-      startCountdown(t.Maghrib);
+    function computeRozaNumber(){
+      const start = getPakStart();
+      if(!start) return null;
+      const s = new Date(start + "T00:00:00");
+      const n = new Date();
+      const diffDays = Math.floor((n - s) / (24*60*60*1000));
+      if(diffDays < 0) return null;
+      return diffDays + 1;
     }
 
-    // ====== Countdown + reveal ======
-    let targetMaghrib = null;
-    let timer = null;
-
-    function tick(){
-      if(!targetMaghrib) return;
-      const diff = targetMaghrib - new Date();
-      if(diff <= 0){
-        hh.textContent="00"; mm.textContent="00"; ss.textContent="00";
-        openBtn.disabled=false;
-        openBtn.textContent="✨ Open Dua Now (Iftar Mubarak)";
+    setPakStartBtn.addEventListener("click", ()=>{
+      if(!pakStart.value){
+        alert("Pakistan Ramadan start date select karo 🙂");
         return;
       }
-      const total = Math.floor(diff/1000);
-      hh.textContent = pad(Math.floor(total/3600));
-      mm.textContent = pad(Math.floor((total%3600)/60));
-      ss.textContent = pad(total%60);
-      openBtn.disabled=true;
-      openBtn.textContent="🔐 Open Dua After Iftar";
-    }
+      setPakStart(pakStart.value);
+      const r = computeRozaNumber();
+      pakStartHint.textContent = r ? `Saved ✅ Start: ${pakStart.value} • Roza #: ${r}` : `Saved ✅ Start: ${pakStart.value}`;
+      rozaTag.textContent = r ? `Roza #: ${r}` : `Roza #: —`;
+      updateSpecialsTag();
+      maybeAutoShowSpecial();
+      refreshEidCountdown(); // eid uses hijri year from API but refresh anyway
+    });
 
-    function startCountdown(maghribStr){
-      targetMaghrib = parseTimeToToday(maghribStr);
-      if(timer) clearInterval(timer);
+    // =========================
+    // Iftar countdown + reveal
+    // =========================
+    let targetMaghrib = null;
+    let iftarTimer = null;
+
+    function startIftarCountdown(maghribStr){
+      targetMaghrib = parseTimeOnDate(new Date(), maghribStr);
+      if(iftarTimer) clearInterval(iftarTimer);
+      const tick = ()=>{
+        if(!targetMaghrib) return;
+        const diff = targetMaghrib - new Date();
+        if(diff <= 0){
+          if_hh.textContent="00"; if_mm.textContent="00"; if_ss.textContent="00";
+          openBtn.disabled=false;
+          openBtn.textContent="✨ Open Iftar Dua (Now)";
+          return;
+        }
+        const total = Math.floor(diff/1000);
+        if_hh.textContent = pad(Math.floor(total/3600));
+        if_mm.textContent = pad(Math.floor((total%3600)/60));
+        if_ss.textContent = pad(total%60);
+        openBtn.disabled=true;
+        openBtn.textContent="🔐 Open Iftar Dua";
+      };
       tick();
-      timer = setInterval(tick, 1000);
+      iftarTimer = setInterval(tick, 1000);
     }
 
     openBtn.addEventListener("click", ()=>{
@@ -626,26 +885,78 @@
       reveal.scrollIntoView({behavior:"smooth", block:"start"});
     });
 
-    // ====== Ramadan calendar (city based) ======
+    // =========================
+    // Next Prayer countdown (needs today + tomorrow timings)
+    // =========================
+    let nextPrayerTarget = null;
+    let nextPrayerTimer = null;
+
+    function startNextPrayerCountdown(){
+      if(nextPrayerTimer) clearInterval(nextPrayerTimer);
+      const tick = ()=>{
+        if(!nextPrayerTarget) return;
+        const diff = nextPrayerTarget.date - new Date();
+        if(diff <= 0){
+          np_hh.textContent="00"; np_mm.textContent="00"; np_ss.textContent="00";
+          np_hint.textContent = "Prayer time! 🤍";
+          return;
+        }
+        const total = Math.floor(diff/1000);
+        np_hh.textContent = pad(Math.floor(total/3600));
+        np_mm.textContent = pad(Math.floor((total%3600)/60));
+        np_ss.textContent = pad(total%60);
+        np_hint.textContent = `Next: ${nextPrayerTarget.name} at ${nextPrayerTarget.time}`;
+      };
+      tick();
+      nextPrayerTimer = setInterval(tick, 1000);
+    }
+
+    function computeNextPrayer(todayTimings, tomorrowTimings){
+      const now = new Date();
+      const today = new Date();
+      const tomorrow = addDays(today, 1);
+
+      const listToday = [
+        {name:"Fajr", time: hhmm(todayTimings.Fajr), date: parseTimeOnDate(today, todayTimings.Fajr)},
+        {name:"Dhuhr", time: hhmm(todayTimings.Dhuhr), date: parseTimeOnDate(today, todayTimings.Dhuhr)},
+        {name:"Asr", time: hhmm(todayTimings.Asr), date: parseTimeOnDate(today, todayTimings.Asr)},
+        {name:"Maghrib", time: hhmm(todayTimings.Maghrib), date: parseTimeOnDate(today, todayTimings.Maghrib)},
+        {name:"Isha", time: hhmm(todayTimings.Isha), date: parseTimeOnDate(today, todayTimings.Isha)},
+      ];
+
+      for(const p of listToday){
+        if(p.date > now) return p;
+      }
+
+      // After Isha -> tomorrow Fajr
+      return {
+        name:"Fajr",
+        time: hhmm(tomorrowTimings.Fajr),
+        date: parseTimeOnDate(tomorrow, tomorrowTimings.Fajr)
+      };
+    }
+
+    // =========================
+    // Ramadan calendar
+    // =========================
     function renderCalendar(rows){
       const now = new Date();
       const todayY = now.getFullYear(), todayM = now.getMonth()+1, todayD = now.getDate();
-
       tbody.innerHTML = "";
       for(const r of rows){
         const tr = document.createElement("tr");
         if(r.gY===todayY && r.gM===todayM && r.gD===todayD) tr.classList.add("today");
         tr.innerHTML = `
           <td>${r.gLabel}</td>
-          <td class="muted">${r.hLabel}</td>
-          <td>${r.imsak || "--:--"}</td>
-          <td>${r.fajr || "--:--"}</td>
-          <td><b style="color:rgba(247,211,122,.95)">${r.maghrib || "--:--"}</b></td>
+          <td style="color:rgba(255,255,255,.62)">${r.hLabel}</td>
+          <td>${r.imsak}</td>
+          <td>${r.fajr}</td>
+          <td><b style="color:rgba(247,211,122,.95)">${r.maghrib}</b></td>
         `;
         tbody.appendChild(tr);
       }
       if(!rows.length){
-        tbody.innerHTML = `<tr><td colspan="5" class="muted">Ramadan calendar not found. City change karke refresh try karo 🙂</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="5" style="color:rgba(255,255,255,.6)">Ramadan calendar not found. City change karke refresh try karo 🙂</td></tr>`;
       }
     }
 
@@ -654,6 +965,7 @@
       const todayHijri = gtoh?.hijri;
       if(!todayHijri) throw new Error("Hijri not available");
 
+      const RAMADAN_MONTH_NUM = 9;
       const hYear = Number(todayHijri.year);
       const hMonth = Number(todayHijri.month?.number);
       const targetHijriYear = (hMonth <= RAMADAN_MONTH_NUM) ? hYear : (hYear + 1);
@@ -689,7 +1001,7 @@
             hLabel: `${h.day} ${h.month.en} ${h.year}`,
             imsak: hhmm(d.timings?.Imsak),
             fajr: hhmm(d.timings?.Fajr),
-            maghrib: hhmm(d.timings?.Maghrib)
+            maghrib: hhmm(d.timings?.Maghrib),
           };
         })
         .sort((a,b)=> (a.gY-b.gY) || (a.gM-b.gM) || (a.gD-b.gD));
@@ -697,11 +1009,301 @@
       return { rows, targetHijriYear };
     }
 
-    // ====== Save/Load pref ======
+    // =========================
+    // Eid countdown (1 Shawwal)
+    // =========================
+    let eidTargetDate = null;
+    let eidTimer = null;
+
+    async function refreshEidCountdown(){
+      try{
+        // Determine hijri year from today's gToH
+        const gtoh = await fetchGToH(todayDDMMYYYY());
+        const h = gtoh?.hijri;
+        if(!h) throw new Error("Hijri missing");
+        const hYear = Number(h.year);
+        const hMonth = Number(h.month?.number);
+
+        // If we're already after Ramadan (month > 9), use current year’s Shawwal; else same year.
+        // But in practice: if month is 9, Eid is in same hijri year month 10.
+        const targetHijriYear = hYear;
+
+        const eidG = await fetchHToG(`01-10-${targetHijriYear}`); // 1 Shawwal
+        const g = eidG?.gregorian;
+        if(!g) throw new Error("Eid date missing");
+
+        // g.day is string "01" etc; build local Date at 00:00
+        const y = Number(g.year);
+        const m = Number(g.month?.number);
+        const d = Number(g.day);
+        eidTargetDate = new Date(y, m-1, d, 0, 0, 0, 0);
+
+        eidDateText.textContent = `Eid date: ${g.day} ${g.month?.en} ${g.year}`;
+
+        if(eidTimer) clearInterval(eidTimer);
+        const tick = ()=>{
+          if(!eidTargetDate) return;
+          const diff = eidTargetDate - new Date();
+          if(diff <= 0){
+            eidCountdown.textContent = "Eid! 🎉";
+            return;
+          }
+          const total = Math.floor(diff/1000);
+          const days = Math.floor(total / 86400);
+          const hours = Math.floor((total % 86400) / 3600);
+          const mins = Math.floor((total % 3600) / 60);
+          eidCountdown.textContent = `${days}d ${pad(hours)}h ${pad(mins)}m`;
+        };
+        tick();
+        eidTimer = setInterval(tick, 1000);
+      } catch(e){
+        console.error(e);
+        eidCountdown.textContent = "--:--";
+        eidDateText.textContent = "Eid date: —";
+      }
+    }
+
+    // =========================
+    // Today UI set (Sehri/Iftar + Namaz)
+    // =========================
+    function setTodayUI(data){
+      const t = data?.timings || {};
+      const g = data?.date?.gregorian || {};
+      todayTag.textContent = `${g.weekday?.en || ""} • ${g.day || ""} ${g.month?.en || ""} ${g.year || ""}`.trim() || "Today";
+
+      fajrTime.textContent = hhmm(t.Fajr);
+      maghribTime.textContent = hhmm(t.Maghrib);
+      imsakNote.textContent = `Imsak: ${hhmm(t.Imsak)}`;
+      sunsetNote.textContent = `Sunset: ${hhmm(t.Sunset)}`;
+
+      // Namaz timings
+      ptFajr.textContent = hhmm(t.Fajr);
+      ptDhuhr.textContent = hhmm(t.Dhuhr);
+      ptAsr.textContent = hhmm(t.Asr);
+      ptMaghrib.textContent = hhmm(t.Maghrib);
+      ptIsha.textContent = hhmm(t.Isha);
+
+      // Roza #
+      const r = computeRozaNumber();
+      rozaTag.textContent = r ? `Roza #: ${r}` : `Roza #: —`;
+      updateSpecialsTag();
+      maybeAutoShowSpecial();
+
+      // Iftar countdown
+      startIftarCountdown(t.Maghrib);
+    }
+
+    // =========================
+    // Specials (Day 10/20/27)
+    // =========================
+    function updateSpecialsTag(){
+      const r = computeRozaNumber();
+      if(!r) { specialsTag.textContent = "Set Pakistan start date"; return; }
+      specialsTag.textContent = `Today: Day ${r}`;
+    }
+
+    function showModal(title, text){
+      modalTitle.textContent = title;
+      modalText.textContent = text;
+      modal.style.display = "flex";
+    }
+    modalClose.addEventListener("click", ()=> modal.style.display = "none");
+    modal.addEventListener("click", (e)=>{ if(e.target === modal) modal.style.display = "none"; });
+
+    const SPECIALS = {
+      10: {
+        title: "✨ Ramadan Day 10 (Mercy)",
+        text: "Rida Ayesha 🤍\nAaj 10th roza… Allah hum par rehmat barhaye, aur hamare dilon ko sukoon de. Ameen.\n\nChhota gift: aaj tumhari pasand ki chai + dates meri taraf se ☕🌴"
+      },
+      20: {
+        title: "✨ Ramadan Day 20 (Forgiveness)",
+        text: "Rida Ayesha 🤍\nAaj 20th roza… Allah hamari maghfirat farmae, aur har gham door kare. Ameen.\n\nChhota gift: aaj tum relax, aur main kitchen handle karunga 🍽️🙂"
+      },
+      27: {
+        title: "🌙 Ramadan Day 27 (Laylat-ul-Qadr vibes)",
+        text: "Rida Ayesha 🤍\nAaj 27th roza… Allah hum dono ko Laylat-ul-Qadr ki barkat naseeb kare. Ameen.\n\nDua: اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي"
+      }
+    };
+
+    function maybeAutoShowSpecial(){
+      const r = computeRozaNumber();
+      if(!r) return;
+      const key = String(r);
+      const seenKey = `special_seen_${key}`;
+      if((r===10 || r===20 || r===27) && !localStorage.getItem(seenKey)){
+        localStorage.setItem(seenKey, "1");
+        showModal(SPECIALS[r].title, SPECIALS[r].text);
+      }
+    }
+
+    openSpecial10.addEventListener("click", ()=> showModal(SPECIALS[10].title, SPECIALS[10].text));
+    openSpecial20.addEventListener("click", ()=> showModal(SPECIALS[20].title, SPECIALS[20].text));
+    openSpecial27.addEventListener("click", ()=> showModal(SPECIALS[27].title, SPECIALS[27].text));
+
+    // =========================
+    // Quran Radio (Sudais)
+    // =========================
+    const SURAH_NAMES = [
+      "Al-Fatihah","Al-Baqarah","Aal-e-Imran","An-Nisa","Al-Ma'idah","Al-An'am","Al-A'raf","Al-Anfal","At-Tawbah","Yunus",
+      "Hud","Yusuf","Ar-Ra'd","Ibrahim","Al-Hijr","An-Nahl","Al-Isra","Al-Kahf","Maryam","Taha",
+      "Al-Anbiya","Al-Hajj","Al-Mu'minun","An-Nur","Al-Furqan","Ash-Shu'ara","An-Naml","Al-Qasas","Al-Ankabut","Ar-Rum",
+      "Luqman","As-Sajdah","Al-Ahzab","Saba","Fatir","Ya-Sin","As-Saffat","Sad","Az-Zumar","Ghafir",
+      "Fussilat","Ash-Shura","Az-Zukhruf","Ad-Dukhan","Al-Jathiyah","Al-Ahqaf","Muhammad","Al-Fath","Al-Hujurat","Qaf",
+      "Adh-Dhariyat","At-Tur","An-Najm","Al-Qamar","Ar-Rahman","Al-Waqi'ah","Al-Hadid","Al-Mujadila","Al-Hashr","Al-Mumtahanah",
+      "As-Saff","Al-Jumu'ah","Al-Munafiqun","At-Taghabun","At-Talaq","At-Tahrim","Al-Mulk","Al-Qalam","Al-Haqqah","Al-Ma'arij",
+      "Nuh","Al-Jinn","Al-Muzzammil","Al-Muddaththir","Al-Qiyamah","Al-Insan","Al-Mursalat","An-Naba","An-Nazi'at","Abasa",
+      "At-Takwir","Al-Infitar","Al-Mutaffifin","Al-Inshiqaq","Al-Buruj","At-Tariq","Al-A'la","Al-Ghashiyah","Al-Fajr","Al-Balad",
+      "Ash-Shams","Al-Layl","Ad-Duha","Ash-Sharh","At-Tin","Al-Alaq","Al-Qadr","Al-Bayyinah","Az-Zalzalah","Al-Adiyat",
+      "Al-Qari'ah","At-Takathur","Al-Asr","Al-Humazah","Al-Fil","Quraysh","Al-Ma'un","Al-Kawthar","Al-Kafirun","An-Nasr",
+      "Al-Masad","Al-Ikhlas","Al-Falaq","An-Nas"
+    ];
+
+    function buildSurahDropdown(){
+      surahSelect.innerHTML = "";
+      for(let i=1;i<=114;i++){
+        const opt = document.createElement("option");
+        opt.value = String(i);
+        opt.textContent = `${i} • ${SURAH_NAMES[i-1]}`;
+        surahSelect.appendChild(opt);
+      }
+      surahSelect.value = "1";
+    }
+    function surahMp3Url(surahNo){ return QURAN_AUDIO_BASE + pad(surahNo) + ".mp3"; }
+
+    function setAudioUI(on){
+      if(on){
+        audioDot.classList.add("on");
+        audioState.textContent = "Quran Radio: ON";
+      } else {
+        audioDot.classList.remove("on");
+        audioState.textContent = "Quran Radio: OFF";
+      }
+    }
+
+    vol.addEventListener("input", ()=> audio.volume = Number(vol.value));
+
+    playBtn.addEventListener("click", async ()=>{
+      const n = Number(surahSelect.value);
+      const url = surahMp3Url(n);
+      try{
+        if(audio.src !== url) audio.src = url;
+        await audio.play();
+        setAudioUI(true);
+      }catch(e){
+        console.error(e);
+        alert("Audio play nahi ho rahi. Browser policy / network issue ho sakta hai.");
+        setAudioUI(false);
+      }
+    });
+    pauseBtn.addEventListener("click", ()=>{ audio.pause(); setAudioUI(false); });
+    nextBtn.addEventListener("click", ()=>{
+      const n = Number(surahSelect.value);
+      const next = (n >= 114) ? 1 : (n + 1);
+      surahSelect.value = String(next);
+      playBtn.click();
+    });
+    audio.addEventListener("ended", ()=>{
+      const n = Number(surahSelect.value);
+      const next = (n >= 114) ? 1 : (n + 1);
+      surahSelect.value = String(next);
+      playBtn.click();
+    });
+    audio.addEventListener("play", ()=> setAudioUI(true));
+    audio.addEventListener("pause", ()=> setAudioUI(false));
+
+    // =========================
+    // Hadith of the day
+    // =========================
+    function dayOfYear(d=new Date()){
+      const start = new Date(d.getFullYear(), 0, 0);
+      const diff = d - start;
+      return Math.floor(diff / (24*60*60*1000));
+    }
+    async function loadHadithOfTheDay(){
+      const seed = dayOfYear();
+      let guess = (seed % 2000) + 1;
+      hadithRef.textContent = "Loading…";
+      hadithText.textContent = "Loading…";
+
+      for(let tries=0; tries<25; tries++){
+        const no = guess + tries;
+        const url = `${HADITH_BASE}/${no}.min.json`;
+        try{
+          const res = await fetch(url);
+          if(!res.ok) continue;
+          const j = await res.json();
+          const text = j?.hadith?.text || j?.text || "";
+          if(!text) continue;
+
+          hadithRef.textContent = `${HADITH_EDITION} #${no}`;
+          hadithText.textContent = text;
+          hadithNote.textContent = "Agar load fail ho to refresh 🙂";
+          return;
+        }catch{}
+      }
+      hadithRef.textContent = "Failed";
+      hadithText.textContent = "Hadith load nahi ho saki. Refresh try karo 🙂";
+      hadithNote.textContent = "";
+    }
+
+    // =========================
+    // Masnoon Duas list
+    // =========================
+    const DUAS = [
+      { key:"sehri", title:"Sehri (Niyyat) (popular)", ar:"وَبِصَوْمِ غَدٍ نَّوَيْتُ مِنْ شَهْرِ رَمَضَانَ", tr:"Wa bisawmi ghadin nawaiytu min shahri Ramadan.", ur:"Main ne Ramadan ke kal ke roza ki niyyat ki." },
+      { key:"iftar", title:"Iftar Dua", ar:"اللَّهُمَّ إِنِّي لَكَ صُمْتُ وَبِكَ آمَنْتُ وَعَلَيْكَ تَوَكَّلْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ", tr:"Allahumma inni laka sumtu wa bika aamantu wa ‘alayka tawakkaltu wa ‘ala rizqika aftartu.", ur:"Ya Allah! maine Tere liye roza rakha… aur Tere rizq se iftar karta hoon." },
+      { key:"laylatulqadr", title:"Laylat-ul-Qadr Dua", ar:"اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي", tr:"Allahumma innaka ‘afuwwun tuhibbul ‘afwa fa‘fu ‘anni.", ur:"Ya Allah! Tu maaf karne wala hai—mujhe maaf farma." },
+      { key:"forgiveness", title:"Maghfirat / Rahmat", ar:"رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ", tr:"Rabbi-ghfir warham wa anta khayrur-raahimeen.", ur:"Aey Rabb! maaf farma, rehmat farma." },
+      { key:"guidance", title:"Hidayat", ar:"يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ", tr:"Ya muqallibal-quloob thabbit qalbi ‘ala deenik.", ur:"Aey dilon ko pherne wale! mere dil ko apne deen par sabit rakh." },
+      { key:"rizq", title:"Rizq me barkat", ar:"اللَّهُمَّ اكْفِنِي بِحَلَالِكَ عَنْ حَرَامِكَ وَأَغْنِنِي بِفَضْلِكَ عَمَّنْ سِوَاكَ", tr:"Allahummak-fini bihalalika ‘an haramika wa aghnini bifadlika ‘amman siwak.", ur:"Ya Allah! halal se kaafi kar, haram se bacha." },
+      { key:"parents", title:"Walidain", ar:"رَّبِّ ارْحَمْهُمَا كَمَا رَبَّيَانِي صَغِيرًا", tr:"Rabbir-hamhuma kama rabbayani sagheera.", ur:"Aey Rabb! walidain par rehmat farma." },
+      { key:"health", title:"Sehat", ar:"اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي", tr:"Allahumma ‘afini fi badani… fi sam‘i… fi basari…", ur:"Ya Allah! mere badan, sun’ne aur dekhne me afiyat ata farma." }
+    ];
+
+    let filtered = [...DUAS];
+    let duaIndex = 0;
+    let duaAuto = true;
+    let duaTimer = null;
+
+    function renderDua(){
+      const d = filtered[duaIndex] || DUAS[0];
+      duaArabic.textContent = d.ar;
+      duaTranslit.textContent = d.tr;
+      duaMeaning.textContent = d.ur;
+      duaCount.textContent = `${duaIndex+1}/${filtered.length}`;
+      duaMeta.textContent = duaAuto ? "Auto rotates every 15s (pause: Auto button)." : "Auto paused (you can next/prev).";
+    }
+    function setAuto(on){
+      duaAuto = on;
+      duaAutoBtn.textContent = on ? "⏯ Auto: ON" : "⏸ Auto: OFF";
+      if(duaTimer) clearInterval(duaTimer);
+      if(on){
+        duaTimer = setInterval(()=>{ duaIndex = (duaIndex+1) % filtered.length; renderDua(); }, 15000);
+      }
+    }
+    duaAutoBtn.addEventListener("click", ()=> setAuto(!duaAuto));
+    duaPrev.addEventListener("click", ()=>{ duaIndex = (duaIndex-1 + filtered.length) % filtered.length; renderDua(); });
+    duaNext.addEventListener("click", ()=>{ duaIndex = (duaIndex+1) % filtered.length; renderDua(); });
+
+    duaSearch.addEventListener("input", ()=>{
+      const q = duaSearch.value.trim().toLowerCase();
+      filtered = DUAS.filter(d =>
+        d.title.toLowerCase().includes(q) ||
+        d.key.toLowerCase().includes(q) ||
+        d.ur.toLowerCase().includes(q)
+      );
+      if(!filtered.length) filtered = [...DUAS];
+      duaIndex = 0;
+      renderDua();
+    });
+
+    // =========================
+    // Save/Load pref
+    // =========================
     function savePref(){
       const pref = { mode: modeEl.value, city: citySelect.value, customCity: customCity.value.trim() };
       localStorage.setItem(PREF_KEY, JSON.stringify(pref));
-      statusLine.textContent = "Saved ✅ Ab next time automatically yahi preference use hogi.";
+      statusLine.textContent = "Saved ✅ Next time yahi settings use hongi.";
     }
     saveBtn.addEventListener("click", savePref);
 
@@ -724,89 +1326,20 @@
         customCity.value = "";
       }
       setModeUI();
-    }
 
-    // ====== Quran Audio (built-in, no URL input) ======
-    let reciterCache = new Map(); // reciterId -> Map(chapterId -> audioUrl)
-
-    function setAudioUI(on){
-      if(on){
-        audioDot.classList.add("on");
-        audioState.textContent = "Audio: ON";
-      }else{
-        audioDot.classList.remove("on");
-        audioState.textContent = "Audio: OFF";
+      // Pakistan start date
+      const ps = getPakStart();
+      if(ps){
+        pakStart.value = ps;
+        const r = computeRozaNumber();
+        pakStartHint.textContent = r ? `Saved: ${ps} • Roza #: ${r}` : `Saved: ${ps}`;
       }
+      updateSpecialsTag();
     }
 
-    vol.addEventListener("input", ()=>{ audio.volume = Number(vol.value); });
-    audio.volume = Number(vol.value);
-
-    async function loadSurahList(){
-      const res = await fetch(Q_CHAPTERS);
-      const j = await res.json();
-      const chapters = j?.chapters || [];
-      surahSelect.innerHTML = "";
-      for(const c of chapters){
-        const opt = document.createElement("option");
-        opt.value = String(c.id);
-        opt.textContent = `${c.id} • ${c.name_simple}`;
-        surahSelect.appendChild(opt);
-      }
-      surahSelect.value = "1";
-    }
-
-    async function ensureReciterMap(reciterId){
-      if(reciterCache.has(reciterId)) return reciterCache.get(reciterId);
-
-      // This endpoint returns audio_files with chapter_id + audio_url
-      const res = await fetch(Q_CHAPTER_RECITATIONS(reciterId));
-      const j = await res.json();
-      const files = j?.audio_files || [];
-
-      const m = new Map();
-      for(const f of files){
-        if(f?.chapter_id && f?.audio_url) m.set(String(f.chapter_id), String(f.audio_url));
-      }
-      reciterCache.set(reciterId, m);
-      return m;
-    }
-
-    async function playSelected(){
-      const reciterId = reciterSelect.value;
-      const chapterId = surahSelect.value;
-
-      try{
-        playBtn.disabled = true;
-        const map = await ensureReciterMap(reciterId);
-        const url = map.get(String(chapterId));
-        if(!url){
-          alert("Is reciter ki is surah ki audio file nahi mili. Another reciter try karo 🙂");
-          return;
-        }
-        if(audio.src !== url) audio.src = url;
-        await audio.play();
-        setAudioUI(true);
-      }catch(e){
-        console.error(e);
-        alert("Audio play nahi ho rahi. Internet / browser autoplay restriction ho sakti hai.");
-        setAudioUI(false);
-      }finally{
-        playBtn.disabled = false;
-      }
-    }
-
-    playBtn.addEventListener("click", playSelected);
-    pauseBtn.addEventListener("click", ()=>{ audio.pause(); setAudioUI(false); });
-
-    audio.addEventListener("ended", ()=> setAudioUI(false));
-    audio.addEventListener("pause", ()=> setAudioUI(false));
-    audio.addEventListener("play", ()=> setAudioUI(true));
-
-    // Optional: warm cache for default (Sudais)
-    (async ()=>{ try{ await ensureReciterMap("3"); }catch{} })();
-
-    // ====== Main load ======
+    // =========================
+    // MAIN LOAD (GPS/City) + Tomorrow timings
+    // =========================
     async function loadAll(){
       loadBtn.disabled = true;
       calTag.textContent = "Loading…";
@@ -816,7 +1349,10 @@
 
       try{
         const mode = modeEl.value;
-        const ddmmyyyy = todayDDMMYYYY();
+        const todayStr = todayDDMMYYYY();
+        const tomorrowStr = ddmmyyyyFromDate(addDays(new Date(), 1));
+
+        let todayData, tomorrowData;
 
         if(mode === "auto"){
           if(!navigator.geolocation) throw new Error("Geolocation not supported");
@@ -836,12 +1372,13 @@
           const lat = pos.coords.latitude, lon = pos.coords.longitude;
           locTag.textContent = `📍 Auto (${lat.toFixed(3)}, ${lon.toFixed(3)})`;
 
-          const todayData = await fetchTimingsByGeoForDate(lat, lon, ddmmyyyy);
+          todayData = await fetchTimingsByGeoForDate(lat, lon, todayStr);
+          tomorrowData = await fetchTimingsByGeoForDate(lat, lon, tomorrowStr);
           setTodayUI(todayData);
 
-          // Calendar always by city (lighter)
+          // Calendar by city (light)
           const city = getCityFromUI();
-          statusLine.textContent = `Aaj ka time GPS se. Poore Ramadan ka calendar city (${city}) se load ho raha hai…`;
+          statusLine.textContent = `Aaj ka time GPS se. Calendar city (${city}) se…`;
           const cal = await buildRamadanCalendarByCity(city);
           calTag.textContent = `Ramadan ${cal.targetHijriYear}`;
           renderCalendar(cal.rows);
@@ -850,7 +1387,8 @@
           const city = getCityFromUI();
           locTag.textContent = `📍 ${city}, ${DEFAULT_COUNTRY}`;
 
-          const todayData = await fetchTimingsByCityForDate(city, DEFAULT_COUNTRY, ddmmyyyy);
+          todayData = await fetchTimingsByCityForDate(city, DEFAULT_COUNTRY, todayStr);
+          tomorrowData = await fetchTimingsByCityForDate(city, DEFAULT_COUNTRY, tomorrowStr);
           setTodayUI(todayData);
 
           const cal = await buildRamadanCalendarByCity(city);
@@ -859,6 +1397,17 @@
 
           statusLine.textContent = `Loaded ✅ City: ${city}.`;
         }
+
+        // Next prayer
+        const nextP = computeNextPrayer(todayData.timings, tomorrowData.timings);
+        nextPrayerTarget = nextP;
+        nextPrayerName.textContent = nextP.name;
+        nextPrayerTime.textContent = nextP.time;
+        nextPrayerNote.textContent = nextP.date.toLocaleString();
+        startNextPrayerCountdown();
+
+        // Eid countdown
+        await refreshEidCountdown();
 
       }catch(e){
         console.error(e);
@@ -870,14 +1419,17 @@
         loadBtn.disabled = false;
       }
     }
-
     loadBtn.addEventListener("click", loadAll);
 
-    // ====== Init ======
-    (async function init(){
+    // =========================
+    // INIT
+    // =========================
+    (function init(){
+      buildSurahDropdown();
       loadPref();
-      setModeUI();
-      await loadSurahList();
+      renderDua();
+      setAuto(true);
+      loadHadithOfTheDay();
       loadAll();
     })();
   </script>
