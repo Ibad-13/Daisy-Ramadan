@@ -9,7 +9,6 @@
       --bg1:#070b1d;
       --bg2:#0b1f2e;
       --gold:#f7d37a;
-      --soft:#b7d6ff;
       --card: rgba(255,255,255,.08);
       --border: rgba(255,255,255,.14);
       --shadow: rgba(0,0,0,.35);
@@ -208,11 +207,49 @@
       font-weight:600;
       letter-spacing:.2px;
     }
+
+    .controls{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:8px;
+      margin:10px 0 8px;
+    }
+    @media (max-width:420px){ .controls{ grid-template-columns:1fr } }
+
+    .select, .input{
+      width:100%;
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      outline:none;
+    }
+    .select option{ color:#000; }
+
+    .miniBtns{ display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; }
+    .miniBtn{
+      flex:1;
+      min-width: 120px;
+      padding:10px 10px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      color:#fff;
+      cursor:pointer;
+      transition: transform .12s ease, filter .2s ease, background .2s ease;
+      font-weight:700;
+    }
+    .miniBtn:hover{ transform: translateY(-1px); filter: brightness(1.07) }
+    .miniBtn.primary{
+      background: linear-gradient(180deg, rgba(247,211,122,.25), rgba(247,211,122,.10));
+    }
+
     .timeRow{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
-      margin-top:8px;
+      margin-top:10px;
     }
     .tbox{
       flex:1;
@@ -361,17 +398,45 @@
         </div>
 
         <div class="panel">
+          <h3>📍 Location / City</h3>
+
+          <div class="controls">
+            <select class="select" id="mode">
+              <option value="auto">Auto detect (GPS)</option>
+              <option value="city">City picker</option>
+            </select>
+
+            <select class="select" id="citySelect" disabled>
+              <option value="Karachi">Karachi</option>
+              <option value="Islamabad">Islamabad</option>
+              <option value="Lahore">Lahore</option>
+              <option value="Rawalpindi">Rawalpindi</option>
+              <option value="Faisalabad">Faisalabad</option>
+              <option value="Multan">Multan</option>
+              <option value="Peshawar">Peshawar</option>
+              <option value="Quetta">Quetta</option>
+            </select>
+          </div>
+
+          <input class="input" id="customCity" placeholder="Custom city (optional), e.g., Abbottabad" disabled />
+
+          <div class="miniBtns">
+            <button class="miniBtn primary" id="loadBtn">Load Iftar Time</button>
+            <button class="miniBtn" id="saveBtn" title="Next time yahi use hoga">Save Preference</button>
+          </div>
+
+          <hr style="border:none;border-top:1px solid rgba(255,255,255,.12); margin:12px 0 10px;">
+
           <h3>⏳ Maghrib tak countdown</h3>
           <div class="timeRow">
             <div class="tbox"><div class="num" id="hh">--</div><div class="lbl">Hours</div></div>
             <div class="tbox"><div class="num" id="mm">--</div><div class="lbl">Minutes</div></div>
             <div class="tbox"><div class="num" id="ss">--</div><div class="lbl">Seconds</div></div>
           </div>
-          <div class="meta" id="metaText">Target time set nahi hai abhi.</div>
 
-          <button class="btn" id="openBtn" disabled>
-            🔐 Open After Iftar
-          </button>
+          <div class="meta" id="metaText">Iftar time load karne ke liye “Load Iftar Time” dabao.</div>
+
+          <button class="btn" id="openBtn" disabled>🔐 Open After Iftar</button>
         </div>
       </div>
 
@@ -416,39 +481,53 @@
 
   <!-- OPTIONAL NASHEED -->
   <audio id="nasheed" loop>
-    <!-- 1) Apna mp3 link yahan set kar do (recommended: put mp3 in same repo and use relative path) -->
-    <!-- Example: <source src="nasheed.mp3" type="audio/mpeg"> -->
+    <!-- Put your MP3 in repo and add:
+      <source src="nasheed.mp3" type="audio/mpeg">
+    -->
   </audio>
 
   <script>
     // =========================
-    // 1) SET YOUR TARGET TIME
+    // PERSONALIZE
     // =========================
-    // Option A: Fixed time today (recommended)
-    // Pakistan time example: 18:25 => "18:25"
-    const MAGHRIB_TIME_TODAY = "18:25"; // <-- CHANGE THIS
-
-    // Option B: If you want manual date-time (uncomment and use)
-    // const TARGET_ISO = "2026-02-19T18:25:00+05:00"; // Asia/Karachi offset +05:00
-
-    // =========================
-    // 2) PERSONALIZE TEXT
-    // =========================
-    const WIFE_NAME = "Rida"; // <-- CHANGE (optional)
+    const WIFE_NAME = "Rida Ayesha";
     const HEADLINE = `Ramzan Mubarak, ${WIFE_NAME} 🤍`;
     const MAIN_MESSAGE = "“Ramzan ka pehla iftaar tumhare saath… har saal isi tarah ho, bas yehi dua hai.”";
 
+    // Prayer time calc method (Pakistan friendly)
+    const METHOD = 1; // University of Islamic Sciences, Karachi
+    const DEFAULT_COUNTRY = "Pakistan";
+
+    // UI
+    const hh = document.getElementById("hh");
+    const mm = document.getElementById("mm");
+    const ss = document.getElementById("ss");
+    const metaText = document.getElementById("metaText");
+    const openBtn = document.getElementById("openBtn");
+    const reveal = document.getElementById("reveal");
+
+    const modeEl = document.getElementById("mode");
+    const citySelect = document.getElementById("citySelect");
+    const customCity = document.getElementById("customCity");
+    const loadBtn = document.getElementById("loadBtn");
+    const saveBtn = document.getElementById("saveBtn");
+
+    // Set texts
+    document.getElementById("headline").textContent = HEADLINE;
+    document.getElementById("message").textContent = MAIN_MESSAGE;
+    document.getElementById("dateTag").textContent =
+      new Date().toLocaleDateString(undefined, { weekday:"long", year:"numeric", month:"long", day:"numeric" });
+
     // =========================
-    // 3) NASHEED TOGGLE
+    // NASHEED TOGGLE (optional)
     // =========================
     const audio = document.getElementById("nasheed");
     const audioToggle = document.getElementById("audioToggle");
     const audioDot = document.getElementById("audioDot");
     const audioLabel = document.getElementById("audioLabel");
-
     let audioOn = false;
+
     audioToggle.addEventListener("click", async () => {
-      // If no source is set, keep it safe:
       if (!audio.querySelector("source")) {
         alert("Nasheed file set nahi hai. MP3 source add karo <audio> tag me 🙂");
         return;
@@ -466,47 +545,74 @@
           audioLabel.textContent = "Nasheed: OFF";
         }
       }catch(e){
-        alert("Browser ne autoplay block kiya ho sakta hai. Click dubara try karo 🙂");
+        alert("Browser autoplay block kar sakta hai. Click dubara try karo 🙂");
       }
     });
 
     // =========================
-    // 4) COUNTDOWN LOGIC
+    // MODE UI
     // =========================
-    const hh = document.getElementById("hh");
-    const mm = document.getElementById("mm");
-    const ss = document.getElementById("ss");
-    const metaText = document.getElementById("metaText");
-    const openBtn = document.getElementById("openBtn");
-    const reveal = document.getElementById("reveal");
+    function setModeUI(){
+      const isCity = modeEl.value === "city";
+      citySelect.disabled = !isCity;
+      customCity.disabled = !isCity;
+    }
+    modeEl.addEventListener("change", setModeUI);
 
-    document.getElementById("headline").textContent = HEADLINE;
-    document.getElementById("message").textContent = MAIN_MESSAGE;
-
-    const dateTag = document.getElementById("dateTag");
-    const now = new Date();
-    dateTag.textContent = now.toLocaleDateString(undefined, { weekday:"long", year:"numeric", month:"long", day:"numeric" });
-
-    function pad(n){ return String(n).padStart(2,'0'); }
-
-    function getTargetDate(){
-      // If using ISO override:
-      // if (typeof TARGET_ISO !== "undefined") return new Date(TARGET_ISO);
-
-      const [H, M] = MAGHRIB_TIME_TODAY.split(":").map(Number);
-      const t = new Date();
-      t.setHours(H, M, 0, 0);
-      return t;
+    function getCityFromUI(){
+      const custom = customCity.value.trim();
+      return custom.length ? custom : citySelect.value;
     }
 
-    const target = getTargetDate();
-    metaText.textContent = `Target time: ${target.toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})}`;
+    // =========================
+    // API FETCH
+    // =========================
+    function pad(n){ return String(n).padStart(2,'0'); }
+
+    function parseTimeToToday(timeStr){
+      // "18:15" OR "18:15 (+05)" -> keep HH:MM
+      const clean = timeStr.trim().slice(0,5);
+      const [H,M] = clean.split(":").map(Number);
+      const d = new Date();
+      d.setHours(H, M, 0, 0);
+      return d;
+    }
+
+    async function fetchByCity(city, country){
+      const url = `https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&method=${METHOD}`;
+      const res = await fetch(url);
+      if(!res.ok) throw new Error("API failed (city)");
+      const data = await res.json();
+      const maghribStr = data?.data?.timings?.Maghrib;
+      const tz = data?.data?.meta?.timezone;
+      if(!maghribStr) throw new Error("Maghrib not found (city)");
+      return { maghribStr, tz, source: `City: ${city}, ${country}` };
+    }
+
+    async function fetchByGeo(lat, lon){
+      const url = `https://api.aladhan.com/v1/timings?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&method=${METHOD}`;
+      const res = await fetch(url);
+      if(!res.ok) throw new Error("API failed (geo)");
+      const data = await res.json();
+      const maghribStr = data?.data?.timings?.Maghrib;
+      const tz = data?.data?.meta?.timezone;
+      if(!maghribStr) throw new Error("Maghrib not found (geo)");
+      return { maghribStr, tz, source: `Auto location (GPS)` };
+    }
+
+    // =========================
+    // COUNTDOWN
+    // =========================
+    let target = null;
+    let timer = null;
 
     function tick(){
-      const n = new Date();
-      let diff = target - n;
+      if(!target) return;
 
-      if (diff <= 0){
+      const n = new Date();
+      const diff = target - n;
+
+      if(diff <= 0){
         hh.textContent = "00";
         mm.textContent = "00";
         ss.textContent = "00";
@@ -525,19 +631,111 @@
       mm.textContent = pad(minutes);
       ss.textContent = pad(seconds);
 
-      // Lock until last 1 minute? (optional)
-      // openBtn.disabled = totalSec > 0;
+      openBtn.disabled = true;
+      openBtn.textContent = "🔐 Open After Iftar";
     }
 
-    setInterval(tick, 1000);
-    tick();
+    function startCountdown(targetDate){
+      target = targetDate;
+      if(timer) clearInterval(timer);
+      tick();
+      timer = setInterval(tick, 1000);
+    }
 
     openBtn.addEventListener("click", () => {
       reveal.style.display = "block";
       openBtn.style.display = "none";
-      // smooth scroll to reveal
       reveal.scrollIntoView({behavior:"smooth", block:"start"});
     });
+
+    // =========================
+    // LOAD / SAVE
+    // =========================
+    async function loadIftar(){
+      try{
+        metaText.textContent = "Loading Maghrib time…";
+        openBtn.disabled = true;
+
+        const mode = modeEl.value;
+        let result;
+
+        if(mode === "auto"){
+          if(!navigator.geolocation) throw new Error("Geolocation not supported");
+
+          try{
+            const pos = await new Promise((resolve, reject) => {
+              navigator.geolocation.getCurrentPosition(resolve, reject, {
+                enableHighAccuracy:true,
+                timeout: 12000
+              });
+            });
+
+            result = await fetchByGeo(pos.coords.latitude, pos.coords.longitude);
+
+          }catch{
+            // If GPS blocked, fallback to City mode automatically
+            modeEl.value = "city";
+            setModeUI();
+            metaText.textContent = "GPS blocked. Switched to City mode…";
+            result = await fetchByCity(citySelect.value, DEFAULT_COUNTRY);
+          }
+        } else {
+          const city = getCityFromUI();
+          result = await fetchByCity(city, DEFAULT_COUNTRY);
+        }
+
+        const maghribHHMM = result.maghribStr.slice(0,5);
+        const t = parseTimeToToday(maghribHHMM);
+
+        metaText.textContent =
+          `${result.source} • Maghrib: ${maghribHHMM}${result.tz ? ` (${result.tz})` : ""}`;
+
+        startCountdown(t);
+
+      }catch(e){
+        console.error(e);
+        metaText.textContent = "Maghrib load nahi ho saka. Internet check karo 🙂";
+        // fallback so gift still opens
+        openBtn.disabled = false;
+        openBtn.textContent = "Open Now (Fallback)";
+      }
+    }
+
+    loadBtn.addEventListener("click", loadIftar);
+
+    saveBtn.addEventListener("click", () => {
+      const pref = {
+        mode: modeEl.value,
+        citySelect: citySelect.value,
+        customCity: customCity.value.trim()
+      };
+      localStorage.setItem("iftar_pref_v1", JSON.stringify(pref));
+      metaText.textContent = "Saved ✅ Next time automatically yahi preference use hogi.";
+    });
+
+    // Init saved preference
+    (function initPref(){
+      try{
+        const raw = localStorage.getItem("iftar_pref_v1");
+        if(raw){
+          const pref = JSON.parse(raw);
+          if(pref.mode) modeEl.value = pref.mode;
+          if(pref.citySelect) citySelect.value = pref.citySelect;
+          if(typeof pref.customCity === "string") customCity.value = pref.customCity;
+        } else {
+          // default
+          modeEl.value = "auto";
+          citySelect.value = "Karachi";
+        }
+      }catch{
+        modeEl.value = "auto";
+        citySelect.value = "Karachi";
+      }
+      setModeUI();
+    })();
+
+    // Auto load on open
+    loadIftar();
   </script>
 </body>
 </html>
